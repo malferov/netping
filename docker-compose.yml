@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      args:
+        app: netping
+        ver: $ver
+    ports:
+      - "80:80"

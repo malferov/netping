@@ -10,3 +10,8 @@
 - Network calculator – calculates subnet range by network mask
 - WHOIS – lists contact info for an IP or domain
 - Bandwidth meter – detects your download speed from our server
+
+## local
+```
+ver=$(git rev-parse --short HEAD) docker-compose up --build -d
+```
