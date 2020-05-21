@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build image
+      env:
+        registry: malferov
+        app: netping
+      run: |
+        tag=$registry/$app:$(git rev-parse --short HEAD)
+        docker build . --tag $tag
+        docker push $tag
