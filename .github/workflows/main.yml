@@ -13,10 +13,11 @@ jobs:
     - name: build image
       env:
         app: netping
+        image: frontend
         registry: docker.pkg.github.com
       run: |
         ver=$(git rev-parse --short HEAD)
-        tag=$registry/${{ github.repository }}:$ver
+        tag=$registry/${{ github.repository }}/$image:$ver
         docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
         docker push $tag
