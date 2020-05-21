@@ -12,12 +12,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: build image
       env:
+        app: netping
         registry: docker.pkg.github.com
       run: |
         ver=$(git rev-parse --short HEAD)
-        echo "github.repository = ${{ github.repository }}"
-        echo "github.actor = ${{ github.actor }}"
         tag=$registry/${{ github.repository }}:$ver
-        docker build . --tag $tag --build-arg app=${{ github.repository }} --build-arg ver=$ver
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login  -u ${{ github.actor }} --password-stdin
+        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
         docker push $tag
