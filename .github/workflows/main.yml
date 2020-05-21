@@ -13,9 +13,9 @@ jobs:
     - name: build image
       env:
         registry: malferov
-        app: netping
       run: |
         ver=$(git rev-parse --short HEAD)
-        tag=$registry/$app:$ver
-        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
-        #docker push $tag
+        tag=$registry/${{ github.repository }}:$ver
+        docker build . --tag $tag --build-arg app=${{ github.repository }} --build-arg ver=$ver
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        docker push $tag
