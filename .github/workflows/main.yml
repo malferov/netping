@@ -33,3 +33,4 @@ jobs:
       run: |
         cd manifest
         ./kubeconfig.sh
+        ./deploy.sh
