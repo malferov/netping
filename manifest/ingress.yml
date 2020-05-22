@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  tls:
+  - hosts:
+    - netping.org
+    secretName: frontend-tls
+  rules:
+    - host: netping.org
+      http:
+        paths:
+        - path: /*
+          backend:
+            serviceName: frontend
+            servicePort: 80

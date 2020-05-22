@@ -5,19 +5,28 @@ on:
     branches:
     - master
 
+env:
+  app: netping
+  image: frontend
+  registry: docker.pkg.github.com
+
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: build image
-      env:
-        app: netping
-        image: frontend
-        registry: docker.pkg.github.com
       run: |
-        ver=$(git rev-parse --short HEAD)
-        tag=$registry/${{ github.repository }}/$image:$ver
-        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
+        tag=$registry/${{ github.repository }}/$image:${{ github.sha }}
+        cd $image
+        docker build . --tag $tag --build-arg app=$app --build-arg ver=${{ github.sha }}
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
         docker push $tag
+
+    - name: deploy
+      run: |
+        kubectl version
+        #kubectl config set-cluster $CI_ENVIRONMENT_NAME --server=$K8S_SERVER --certificate-authority=$K8S_CERTIFICATE_AUTHORITY
+        #kubectl config set-credentials gitlab --token=$K8S_USER_TOKEN
+        #kubectl config set-context gitlab --cluster=$CI_ENVIRONMENT_NAME --user=gitlab --namespace=default #$CI_ENVIRONMENT_NAME
+        #kubectl config use-context gitlab

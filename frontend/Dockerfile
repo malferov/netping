@@ -5,7 +5,7 @@ ENV app $app.org
 RUN apk add py-pip
 RUN pip install jinja2-cli
 COPY http.conf .
-COPY html/index.html .
+COPY index.html .
 RUN jinja2 http.conf -D app=$app > http.conf.rendered
 RUN jinja2 index.html -D app=$app -D ver=$ver > index.html.rendered
 
