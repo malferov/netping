@@ -19,3 +19,5 @@ spec:
         image: {{ registry }}/{{ actor }}/{{ app }}/{{ service }}:{{ ver }}
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: regcred

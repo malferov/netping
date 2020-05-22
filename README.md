@@ -17,7 +17,11 @@
 ```
 ver=$(git rev-parse --short HEAD) docker-compose up --build -d
 ```
-## init
+## kube init
 ```
 kubectl create namespace netping
+docker login docker.pkg.github.com
+kubectl create secret generic regcred \
+  --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
+  --type=kubernetes.io/dockerconfigjson
 ```
