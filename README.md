@@ -17,3 +17,7 @@
 ```
 ver=$(git rev-parse --short HEAD) docker-compose up --build -d
 ```
+## inin
+```
+kubectl create namespace netping
+```
