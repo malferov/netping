@@ -17,16 +17,21 @@ jobs:
     - uses: actions/checkout@v2
     - name: build image
       run: |
-        tag=$registry/${{ github.repository }}/$image:${{ github.sha }}
+        ver=$(git rev-parse --short HEAD)
+        tag=$registry/${{ github.repository }}/$image:$ver
         cd $image
-        docker build . --tag $tag --build-arg app=$app --build-arg ver=${{ github.sha }}
+        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
         docker push $tag
 
     - name: deploy
+      env:
+        K8S_SERVER: ${{ secrets.K8S_SERVER }}
+        K8S_USER: ${{ secrets.K8S_USER }}
+        K8S_PASS: ${{ secrets.K8S_PASS }}
       run: |
+        kubectl config set-cluster kube --server=https://$K8S_SERVER --insecure-skip-tls-verify=true
+        kubectl config set-credentials CI --username=$K8S_USER --password=$K8S_PASS
+        kubectl config set-context kube --cluster=kube --user=CI --namespace=$app
+        kubectl config use-context kube
         kubectl version
-        #kubectl config set-cluster $CI_ENVIRONMENT_NAME --server=$K8S_SERVER --certificate-authority=$K8S_CERTIFICATE_AUTHORITY
-        #kubectl config set-credentials gitlab --token=$K8S_USER_TOKEN
-        #kubectl config set-context gitlab --cluster=$CI_ENVIRONMENT_NAME --user=gitlab --namespace=default #$CI_ENVIRONMENT_NAME
-        #kubectl config use-context gitlab

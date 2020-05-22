@@ -1,5 +1,7 @@
 # netping.org
 
+![CI](https://github.com/malferov/netping/workflows/CI/badge.svg)
+
 - Ping - shows how long it takes for packets to reach host
 - Traceroute - traces the route of packets to destination host from our service
 - DNS lookup - look up DNS records
