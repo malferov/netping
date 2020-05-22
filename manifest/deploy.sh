@@ -1,12 +1,11 @@
 #/bin/bash
 #set -e
 
-pip install jinja2-cli
+pip install --user jinja2-cli
 
-which jinja2
 whereis jinja2
-pip show jinja2
 pip show jinja2-cli
+jq --version
 
 #jinja2 frontend.yml \
 #  -D registry=$registry \
