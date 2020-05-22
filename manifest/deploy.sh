@@ -5,6 +5,8 @@ pip install jinja2-cli
 
 which jinja2
 whereis jinja2
+pip show jinja2
+pip show jinja2-cli
 
 #jinja2 frontend.yml \
 #  -D registry=$registry \
