@@ -7,8 +7,9 @@ on:
 
 env:
   app: netping
-  image: frontend
+  service: frontend
   registry: docker.pkg.github.com
+  actor: ${{ github.actor }}
 
 jobs:
   build-deploy:
@@ -18,10 +19,10 @@ jobs:
     - name: build image
       run: |
         ver=$(git rev-parse --short HEAD)
-        tag=$registry/${{ github.repository }}/$image:$ver
-        cd $image
+        tag=$registry/${{ github.repository }}/$service:$ver
+        cd $service
         docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
         docker push $tag
 
     - name: deploy
@@ -30,8 +31,5 @@ jobs:
         K8S_USER: ${{ secrets.K8S_USER }}
         K8S_PASS: ${{ secrets.K8S_PASS }}
       run: |
-        kubectl config set-cluster kube --server=https://$K8S_SERVER --insecure-skip-tls-verify=true
-        kubectl config set-credentials CI --username=$K8S_USER --password=$K8S_PASS
-        kubectl config set-context kube --cluster=kube --user=CI --namespace=$app
-        kubectl config use-context kube
-        kubectl version
+        cd manifest
+        ./kubeconfig.sh
