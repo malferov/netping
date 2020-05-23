@@ -16,10 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: set env
+      run: |
+        echo "::set-env name=ver::$(git rev-parse --short HEAD)"
+        echo "::set-env name=tag::$registry/${{ github.repository }}/$service:$ver"
+
     - name: build image
       run: |
-        ver=$(git rev-parse --short HEAD)
-        export tag=$registry/${{ github.repository }}/$service:$ver
+        #ver=$(git rev-parse --short HEAD)
+        #tag=$registry/${{ github.repository }}/$service:$ver
+        echo ver=$ver tag=$tag
         cd $service
         docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
@@ -31,8 +37,6 @@ jobs:
         K8S_USER: ${{ secrets.K8S_USER }}
         K8S_PASS: ${{ secrets.K8S_PASS }}
       run: |
-        echo "rev: $(git rev-parse --short HEAD)"
-        printenv
         #cd manifest
         #./kubeconfig.sh
         #./deploy.sh
