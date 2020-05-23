@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: frontend
+  name: {{ service }}
   labels:
-    app: frontend
+    app: {{ service }}
 spec:
   tls:
   - hosts:
-    - netping.org
+    - {{ app }}.{{ domain }}
     secretName: tls
   rules:
-    - host: netping.org
+    - host: {{ app }}.{{ domain }}
       http:
         paths:
         - path: /*
           backend:
-            serviceName: frontend
+            serviceName: {{ service }}
             servicePort: 80

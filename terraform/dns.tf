@@ -1,5 +1,6 @@
-/*
-variable "ip" {}
+variable "ip" {
+  default = "127.0.0.1"
+}
 
 data "digitalocean_domain" "domain" {
   name = var.domain
@@ -12,4 +13,3 @@ resource "digitalocean_record" "app" {
   value  = var.ip
   ttl    = 60
 }
-*/

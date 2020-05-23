@@ -39,16 +39,12 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
         docker push $tag
 
-    - name: tf init
+    - name: terraform
       env:
         be_token: ${{ secrets.be_token }}
       run: |
         cd terraform
         ./init.sh
-
-    - name: tls
-      run: |
-        cd terraform
         terraform apply -auto-approve
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
