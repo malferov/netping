@@ -18,13 +18,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: set env
       run: |
-        echo "::set-env name=ver::$(git rev-parse --short HEAD)"
+        ver=$(git rev-parse --short HEAD)
+        echo "::set-env name=ver::$ver"
         echo "::set-env name=tag::$registry/${{ github.repository }}/$service:$ver"
 
     - name: build image
       run: |
-        #ver=$(git rev-parse --short HEAD)
-        #tag=$registry/${{ github.repository }}/$service:$ver
         echo ver=$ver tag=$tag
         cd $service
         docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
@@ -37,6 +36,7 @@ jobs:
         K8S_USER: ${{ secrets.K8S_USER }}
         K8S_PASS: ${{ secrets.K8S_PASS }}
       run: |
+        echo ver=$ver tag=$tag
         #cd manifest
         #./kubeconfig.sh
         #./deploy.sh
