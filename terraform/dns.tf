@@ -3,13 +3,13 @@ variable "ip" {
 }
 
 data "digitalocean_domain" "domain" {
-  name = var.domain
+  name = "${var.app}.${var.domain}"
 }
 
 resource "digitalocean_record" "app" {
   domain = data.digitalocean_domain.domain.name
   type   = "A"
-  name   = var.app
+  name   = "@"
   value  = var.ip
   ttl    = 60
 }
