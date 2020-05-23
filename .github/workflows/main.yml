@@ -31,6 +31,7 @@ jobs:
         K8S_USER: ${{ secrets.K8S_USER }}
         K8S_PASS: ${{ secrets.K8S_PASS }}
       run: |
+        ver=$(git rev-parse --short HEAD)
         cd manifest
         ./kubeconfig.sh
         ./deploy.sh
