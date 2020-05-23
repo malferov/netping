@@ -12,6 +12,15 @@ env:
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
 
+  TF_INPUT: 0
+  TF_IN_AUTOMATION: 1
+  TF_VAR_do_token: ${{ secrets.do_token }}
+  TF_VAR_letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
+  #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
+  TF_VAR_app: netping
+  TF_VAR_domain: softec.pw
+  TF_VAR_email: ${{ secrets.email }}
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -31,17 +40,9 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
         docker push $tag
 
-    - name: terraform
+    - name: tls
       env:
         be_token: ${{ secrets.be_token }}
-        TF_INPUT: 0
-        TF_IN_AUTOMATION: 1
-        TF_VAR_do_token: ${{ secrets.do_token }}
-        TF_VAR_letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
-        #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-        TF_VAR_app: netping
-        TF_VAR_domain: softec.pw
-        TF_VAR_email: ${{ secrets.email }}
       run: |
         cd terraform
         ./init.sh
@@ -58,3 +59,9 @@ jobs:
         cd manifest
         ./kubeconfig.sh
         ./deploy.sh
+
+    - name: terraform
+      run: |
+        cd terraform
+        ./ip.sh
+        terraform apply -auto-approve
