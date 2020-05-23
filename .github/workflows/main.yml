@@ -49,9 +49,9 @@ jobs:
     - name: tls
       run: |
         cd terraform
-        ./tls.sh
-        echo "::set-env name=crt::$crt"
-        echo "::set-env name=key::$key"
+        terraform apply -auto-approve
+        echo "::set-env name=crt::$(terraform output crt)"
+        echo "::set-env name=key::$(terraform output key)"
 
     - name: deploy
       env:
