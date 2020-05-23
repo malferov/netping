@@ -21,6 +21,7 @@ jobs:
         ver=$(git rev-parse --short HEAD)
         echo "::set-env name=ver::$ver"
         echo "::set-env name=tag::$registry/${{ github.repository }}/$service:$ver"
+        sudo pip install jinja2-cli
 
     - name: build image
       run: |

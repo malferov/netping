@@ -1,6 +1,5 @@
 #/bin/bash
 set -e
-sudo pip install jinja2-cli
 
 jinja2 frontend.yml -D service=$service -D tag=$tag |
   kubectl apply -f -
