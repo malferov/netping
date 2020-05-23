@@ -49,7 +49,6 @@ jobs:
     - name: tls
       run: |
         cd terraform
-        printenv | grep TF_VAR
         ./tls.sh
         echo "::set-env name=crt::$crt"
         echo "::set-env name=key::$key"

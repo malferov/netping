@@ -25,3 +25,7 @@ kubectl create secret generic regcred \
   --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
   --type=kubernetes.io/dockerconfigjson
 ```
+## terraform init
+```
+remote backend -> netping workspace -> general settings -> local mode
+```
