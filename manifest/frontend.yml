@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: {{ service }}
-        image: {{ registry }}/{{ actor }}/{{ app }}/{{ service }}:{{ ver }}
+        image: {{ tag }}
         ports:
         - containerPort: 80
       imagePullSecrets:
