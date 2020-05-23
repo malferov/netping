@@ -16,6 +16,7 @@ env:
   #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
   TF_VAR_domain: org
   TF_VAR_app: $app
+  TF_VAR_email: ${{ secrets.email }}
 
 jobs:
   build-deploy:
@@ -39,7 +40,6 @@ jobs:
     - name: tf init
       env:
         be_token: ${{ secrets.be_token }}
-        TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform
         TF_INPUT: 0
         TF_IN_AUTOMATION: 1
       run: |
@@ -49,6 +49,7 @@ jobs:
     - name: tls
       run: |
         cd terraform
+        printenv | grep TF_VAR
         ./tls.sh
         echo "::set-env name=crt::$crt"
         echo "::set-env name=key::$key"
