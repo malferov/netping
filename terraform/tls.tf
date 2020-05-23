@@ -26,9 +26,11 @@ resource "acme_certificate" "cert" {
 }
 
 output "crt" {
-  value = base64encode("${acme_certificate.cert.certificate_pem}${acme_certificate.cert.issuer_pem}")
+  sensitive = true
+  value     = base64encode("${acme_certificate.cert.certificate_pem}${acme_certificate.cert.issuer_pem}")
 }
 
 output "key" {
-  value = base64encode(acme_certificate.cert.private_key_pem)
+  sensitive = true
+  value     = base64encode(acme_certificate.cert.private_key_pem)
 }

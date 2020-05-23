@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 terraform apply -auto-approve
-export crt=$(terraform output -json crt | jq '.value')
-export key=$(terraform output -json key | jq '.value')
+export crt=$(terraform output crt)
+export key=$(terraform output key)
