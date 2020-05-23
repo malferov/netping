@@ -11,6 +11,12 @@ env:
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
 
+  TF_VAR_do_token: ${{ secrets.do_token }}
+  TF_VAR_letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
+  #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
+  TF_VAR_domain: org
+  TF_VAR_app: $app
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -33,14 +39,16 @@ jobs:
     - name: tf init
       env:
         be_token: ${{ secrets.be_token }}
-        TF_VAR_do_token: ${{ secrets.do_token }}
-        TF_VAR_letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
-        #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-        TF_VAR_domain: org
-        TF_VAR_app: $app
       run: |
         cd terraform
         ./init.sh
+
+    - name: tls
+      run: |
+        cd terraform
+        ./tls.sh
+        echo "::set-env name=crt::$crt"
+        echo "::set-env name=key::$key"
 
     - name: deploy
       env:
