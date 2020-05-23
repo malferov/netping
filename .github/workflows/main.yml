@@ -11,10 +11,12 @@ env:
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
 
+  TF_INPUT: 0
+  TF_IN_AUTOMATION: 1
   TF_VAR_do_token: ${{ secrets.do_token }}
   TF_VAR_letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
   #TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-  TF_VAR_domain: org
+  TF_VAR_domain: softec.pw
   TF_VAR_app: netping
   TF_VAR_email: ${{ secrets.email }}
 
@@ -40,8 +42,6 @@ jobs:
     - name: tf init
       env:
         be_token: ${{ secrets.be_token }}
-        TF_INPUT: 0
-        TF_IN_AUTOMATION: 1
       run: |
         cd terraform
         ./init.sh

@@ -1,4 +1,3 @@
-variable "do_token" {}
 variable "domain" {}
 variable "app" {}
 variable "email" {}
