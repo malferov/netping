@@ -39,6 +39,9 @@ jobs:
     - name: tf init
       env:
         be_token: ${{ secrets.be_token }}
+        TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform
+        TF_INPUT: 0
+        TF_IN_AUTOMATION: 1
       run: |
         cd terraform
         ./init.sh
