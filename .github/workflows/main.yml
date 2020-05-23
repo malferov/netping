@@ -7,7 +7,9 @@ on:
 
 env:
   app: netping
-  domain: softec.pw
+  domain: org
+  TF_VAR_app: netping
+  TF_VAR_domain: org
   service: frontend
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
@@ -16,8 +18,6 @@ env:
   TF_IN_AUTOMATION: 1
   TF_VAR_do_token: ${{ secrets.do_token }}
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-  TF_VAR_app: netping
-  TF_VAR_domain: softec.pw
   TF_VAR_email: ${{ secrets.email }}
 
 jobs:
