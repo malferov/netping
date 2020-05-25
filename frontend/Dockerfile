@@ -12,3 +12,4 @@ RUN jinja2 index.html -D app=$app -D ver=$ver > index.html.rendered
 FROM nginx:alpine
 COPY --from=tpl http.conf.rendered /etc/nginx/conf.d/http.conf
 COPY --from=tpl index.html.rendered /usr/share/nginx/html/index.html
+COPY styles.css /usr/share/nginx/html/styles.css

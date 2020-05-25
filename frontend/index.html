@@ -1,12 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ app }}</title>
-  </head>
-  <body>
-    <div style="font-family:courier;">
-      <p>network tools</p>
-      <p>version {{ ver }}</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="styles.css" rel="stylesheet">
+  <title>{{ app }}</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  {% raw %}
+  <div id="app">
+    <p>network tools</p>
+    <input type="text">
+    <button @click="api">
+      ping
+    </button>
+    <div id="output">
+      {{ mock.startedDateTime }}
     </div>
-  </body>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        mock: {}
+      },
+      methods: {
+        api( ) {
+          fetch('https://mockbin.com/request')
+            .then(response => response.json())
+            .then(json => {
+              this.mock = json
+            })
+        }
+      }
+    })
+  </script>
+  {% endraw %}
+  <footer>
+    <p>version {{ ver }}</p>
+  </footer>
+</body>
 </html>
