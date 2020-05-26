@@ -4,13 +4,13 @@ on:
   push:
     branches:
     - master
+    - feature/*
 
 env:
   app: netping
   domain: org
   TF_VAR_app: netping
   TF_VAR_domain: org
-  service: frontend
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
 
@@ -23,21 +23,13 @@ env:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+        - frontend
+        - frontend
     steps:
     - uses: actions/checkout@v2
-    - name: set env
-      run: |
-        ver=$(git rev-parse --short HEAD)
-        echo "::set-env name=ver::$ver"
-        echo "::set-env name=tag::$registry/${{ github.repository }}/$service:$ver"
-        sudo pip install jinja2-cli
-
-    - name: build image
-      run: |
-        cd $service
-        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
-        docker push $tag
 
     - name: tls
       env:
@@ -49,6 +41,20 @@ jobs:
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
 
+    - name: set env
+      run: |
+        ver=$(git rev-parse --short HEAD)
+        echo "::set-env name=ver::$ver"
+        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$ver"
+        sudo pip install jinja2-cli
+
+    - name: build image
+      run: |
+        cd ${{ matrix.service }}
+        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
+        docker push $tag
+
     - name: deploy
       env:
         K8S_SERVER: ${{ secrets.K8S_SERVER }}
@@ -59,7 +65,7 @@ jobs:
         ./kubeconfig.sh
         ./deploy.sh
 
-    - name: terraform
+    - name: dns
       run: |
         cd terraform
         ./ip.sh

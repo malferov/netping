@@ -1,4 +1,5 @@
-*.jpg
+img
 .key
 .terraform
 *.rendered
+services/ping
