@@ -9,4 +9,4 @@ spec:
   selector:
     app: {{ service }}
   ports:
-    - port: 80
+    - port: {{ port }}

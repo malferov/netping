@@ -20,16 +20,18 @@ env:
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
   TF_VAR_email: ${{ secrets.email }}
 
+  K8S_SERVER: ${{ secrets.K8S_SERVER }}
+  K8S_USER: ${{ secrets.K8S_USER }}
+  K8S_PASS: ${{ secrets.K8S_PASS }}
+
 jobs:
-  build-deploy:
+  base:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        service:
-        - frontend
-        - frontend
     steps:
     - uses: actions/checkout@v2
+
+    - name: deps
+      run: sudo pip install jinja2-cli
 
     - name: tls
       env:
@@ -40,6 +42,28 @@ jobs:
         terraform apply -auto-approve
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
+
+    - name: ingress
+      run: |
+        cd manifest
+        ./kubeconfig.sh
+        ./ingress.sh
+
+    - name: dns
+      run: |
+        cd terraform
+        ./ip.sh
+        terraform apply -auto-approve
+
+  build-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+        - web
+        - ping
+    steps:
+    - uses: actions/checkout@v2
 
     - name: set env
       run: |
@@ -55,18 +79,8 @@ jobs:
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
         docker push $tag
 
-    - name: deploy
-      env:
-        K8S_SERVER: ${{ secrets.K8S_SERVER }}
-        K8S_USER: ${{ secrets.K8S_USER }}
-        K8S_PASS: ${{ secrets.K8S_PASS }}
+    - name: deploy service
       run: |
         cd manifest
         ./kubeconfig.sh
-        ./deploy.sh
-
-    - name: dns
-      run: |
-        cd terraform
-        ./ip.sh
-        terraform apply -auto-approve
+        ./service.sh ${{ matrix.service }}

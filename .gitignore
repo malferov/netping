@@ -2,4 +2,4 @@ img
 .key
 .terraform
 *.rendered
-services/ping
+ping/ping
