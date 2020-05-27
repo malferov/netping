@@ -17,6 +17,9 @@ spec:
       containers:
       - name: {{ service }}
         image: {{ tag }}
+        env:
+        - name: GIN_MODE
+          value: release
         ports:
         - containerPort: {{ port }}
       imagePullSecrets:

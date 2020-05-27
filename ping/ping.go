@@ -11,7 +11,6 @@ import (
 
 var (
 	version = "dev"
-	commit  = "none"
 	date    = "unknown"
 	pod     string
 )
@@ -41,7 +40,6 @@ func main() {
 func getVersion(c *gin.Context) {
 	body := gin.H{
 		"version":  version,
-		"commit":   commit,
 		"date":     date,
 		"hostname": pod,
 		"ginmode":  gin.Mode(),

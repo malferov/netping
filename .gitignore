@@ -1,5 +1,6 @@
 img
 .key
 .terraform
+*.tfvars
 *.rendered
 ping/ping
