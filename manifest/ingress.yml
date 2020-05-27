@@ -39,7 +39,7 @@ spec:
   'ping'
   ]
 %}
-        - path: /{{ service }}
+        - path: /{{ service }}/*
           backend:
             serviceName: {{ service }}
             servicePort: 5000

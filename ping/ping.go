@@ -18,10 +18,12 @@ var (
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
-	r.GET("/hc", healthCheck)
-	r.GET("/version", getVersion)
 	r.GET("/", statusOk)
-	r.GET("/ping/:hostname", ping)
+	g := r.Group("/ping")
+	{
+		g.GET("/version", getVersion)
+		g.GET("/v1/:hostname", ping)
+	}
 	return r
 }
 
@@ -34,10 +36,6 @@ func main() {
 
 	router := setupRouter()
 	router.Run(":" + port)
-}
-
-func healthCheck(c *gin.Context) {
-	c.String(http.StatusOK, "OK")
 }
 
 func getVersion(c *gin.Context) {
