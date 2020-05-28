@@ -11,34 +11,19 @@
   {% raw %}
   <div id="app">
     <p>network tools</p>
-    <input type="text">
-    <button @click="api">
+    <input type="text" v-model.text="hostname">
+    <button @click="main">
       ping
     </button>
     <div id="output">
-      {{ mock.startedDateTime }}
+      {{ output }}
     </div>
   </div>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        mock: {}
-      },
-      methods: {
-        api( ) {
-          fetch('https://mockbin.com/request')
-            .then(response => response.json())
-            .then(json => {
-              this.mock = json
-            })
-        }
-      }
-    })
-  </script>
   {% endraw %}
+  <script src="script.js"></script>
   <footer>
     <p>version {{ ver }}</p>
+    <p>date {{ date }}</p>
   </footer>
 </body>
 </html>

@@ -4,13 +4,13 @@ on:
   push:
     branches:
     - master
+    - feature/*
 
 env:
   app: netping
   domain: org
   TF_VAR_app: netping
   TF_VAR_domain: org
-  service: frontend
   registry: docker.pkg.github.com
   actor: ${{ github.actor }}
 
@@ -20,24 +20,18 @@ env:
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
   TF_VAR_email: ${{ secrets.email }}
 
+  K8S_SERVER: ${{ secrets.K8S_SERVER }}
+  K8S_USER: ${{ secrets.K8S_USER }}
+  K8S_PASS: ${{ secrets.K8S_PASS }}
+
 jobs:
-  build-deploy:
+  base:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: set env
-      run: |
-        ver=$(git rev-parse --short HEAD)
-        echo "::set-env name=ver::$ver"
-        echo "::set-env name=tag::$registry/${{ github.repository }}/$service:$ver"
-        sudo pip install jinja2-cli
 
-    - name: build image
-      run: |
-        cd $service
-        docker build . --tag $tag --build-arg app=$app --build-arg ver=$ver
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
-        docker push $tag
+    - name: deps
+      run: sudo pip install jinja2-cli
 
     - name: tls
       env:
@@ -49,18 +43,47 @@ jobs:
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
 
-    - name: deploy
-      env:
-        K8S_SERVER: ${{ secrets.K8S_SERVER }}
-        K8S_USER: ${{ secrets.K8S_USER }}
-        K8S_PASS: ${{ secrets.K8S_PASS }}
+    - name: ingress
       run: |
         cd manifest
         ./kubeconfig.sh
-        ./deploy.sh
+        ./ingress.sh
 
-    - name: terraform
+    - name: dns
       run: |
         cd terraform
         ./ip.sh
         terraform apply -auto-approve
+
+  build-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+        - web
+        - ping
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: set env
+      run: |
+        ver=$(git rev-parse --short HEAD)
+        echo "::set-env name=ver::$ver"
+        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$ver"
+        sudo pip install jinja2-cli
+
+    - name: build image
+      run: |
+        cd ${{ matrix.service }}
+        docker build . --tag $tag \
+          --build-arg app=$app \
+          --build-arg ver=$ver \
+          --build-arg date="$(date --rfc-3339=seconds)"
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
+        docker push $tag
+
+    - name: deploy service
+      run: |
+        cd manifest
+        ./kubeconfig.sh
+        ./service.sh ${{ matrix.service }}

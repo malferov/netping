@@ -1,19 +1,46 @@
+{% set host = app + '.' + domain %}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ service }}
+  name: frontend
   labels:
-    app: {{ service }}
+    app: frontend
 spec:
   tls:
   - hosts:
-    - {{ app }}.{{ domain }}
+    - {{ host }}
     secretName: tls
   rules:
-    - host: {{ app }}.{{ domain }}
+    - host: {{ host }}
       http:
         paths:
         - path: /*
           backend:
-            serviceName: {{ service }}
+            serviceName: web
             servicePort: 80
+---
+{% set api = 'api.' + host %}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  tls:
+  - hosts:
+    - {{ api }}
+    secretName: tls
+  rules:
+    - host: {{ api }}
+      http:
+        paths:
+{% for service in [
+  'ping'
+  ]
+%}
+        - path: /{{ service }}/*
+          backend:
+            serviceName: {{ service }}
+            servicePort: 5000
+{% endfor %}

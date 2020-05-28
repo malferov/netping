@@ -13,9 +13,9 @@ resource "acme_registration" "reg" {
 }
 
 resource "acme_certificate" "cert" {
-  account_key_pem = acme_registration.reg.account_key_pem
-  common_name     = "${var.app}.${var.domain}"
-
+  account_key_pem           = acme_registration.reg.account_key_pem
+  common_name               = "${var.app}.${var.domain}"
+  subject_alternative_names = ["api.${var.app}.${var.domain}"]
   dns_challenge {
     provider = "digitalocean"
 

@@ -1,5 +1,11 @@
 #!/bin/bash
-ip=$(kubectl get ingress $service -o=jsonpath='{.status.loadBalancer.ingress[].ip}')
-if [ -n "$ip" ]; then
-  echo ip = \"$ip\" > ip.auto.tfvars
+web=$(kubectl get ingress frontend -o=jsonpath='{.status.loadBalancer.ingress[].ip}')
+api=$(kubectl get ingress backend  -o=jsonpath='{.status.loadBalancer.ingress[].ip}')
+
+if [ -n "$web" ]; then
+  echo web = \"$web\" > web.auto.tfvars
+fi
+
+if [ -n "$api" ]; then
+  echo api = \"$api\" > api.auto.tfvars
 fi
