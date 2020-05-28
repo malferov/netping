@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	"net/http"
@@ -17,6 +18,7 @@ var (
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.GET("/", statusOk)
 	g := r.Group("/ping")
 	{
