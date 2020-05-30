@@ -15,8 +15,7 @@
     <button @click="main">
       ping
     </button>
-    <div id="output">
-      {{ output }}
+    <div id="output" v-html="output">
     </div>
   </div>
   {% endraw %}

@@ -1,11 +1,19 @@
 version: '3.7'
 services:
-  frontend:
+  web:
     build:
       context: web/.
       args:
         app: netping
-        ver: $ver
+        ver: "dev"
         date: "2020-05-28 00:37:31+02:00"
     ports:
       - "80:80"
+  ping:
+    build:
+      context: ping/.
+      args:
+        ver: "dev"
+        date: "2020-05-28 00:37:31+02:00"
+    ports:
+      - "5000:5000"
