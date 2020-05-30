@@ -7,13 +7,17 @@ import (
 	"github.com/golang/glog"
 	"net/http"
 	"os"
+	"os/exec"
 	"regexp"
+	"strconv"
 )
 
 var (
-	version = "dev"
-	date    = "unknown"
-	pod     string
+	version             = "dev"
+	date                = "unknown"
+	pod                 string
+	validIpAddressRegex = `^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$`
+	validHostnameRegex  = `^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$`
 )
 
 func setupRouter() *gin.Engine {
@@ -57,13 +61,22 @@ func statusOk(c *gin.Context) {
 func ping(c *gin.Context) {
 	hostname := c.Param("hostname")
 	glog.Info("ping: " + hostname)
+
 	// validate hostname
-	var alpha = regexp.MustCompile(`^[[:alpha:]]+$`).MatchString
-	if !alpha(hostname) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed hostname"})
+	var validip = regexp.MustCompile(validIpAddressRegex).MatchString
+	var validhn = regexp.MustCompile(validHostnameRegex).MatchString
+	glog.Info("ValidIpAddress: " + strconv.FormatBool(validip(hostname)))
+	glog.Info("ValidHostname: " + strconv.FormatBool(validhn(hostname)))
+
+	if !validip(hostname) && !validhn(hostname) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed ip address or hostname"})
 	} else {
+		out, err := exec.Command("ping", "-c 3", "-i 0.2", "-W 2", hostname).CombinedOutput()
+		if err != nil {
+			glog.Error("ping: " + err.Error())
+		}
 		c.JSON(http.StatusOK, gin.H{
-			"message": "hostname is " + hostname,
+			"message": string(out),
 		})
 	}
 	glog.Infof("ping: %d", http.StatusOK)
