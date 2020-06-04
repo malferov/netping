@@ -1,0 +1,17 @@
+@import 'normalize';
+@include normalize();
+@import "_variables";
+@import "_typo";
+@import "_functions";
+@import "_mixins";
+@import "_base";
+
+
+// components
+@import "components/header";
+@import "components/footer";
+@import "components/menu-sidebar";
+@import "components/main-content";
+
+//pages
+@import "pages/home";

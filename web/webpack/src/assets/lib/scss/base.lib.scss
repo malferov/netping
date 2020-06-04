@@ -1,0 +1,35 @@
+.flex {
+  display: flex;
+
+  &-row {
+    flex-direction: row;
+
+    &-reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &-col {
+    flex-direction: column;
+
+    &-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+
+    &-wrap-reverse {
+      flex-wrap: wrap-reverse;
+    }
+  }
+
+  &-no-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.hidden {
+  display: none;
+}

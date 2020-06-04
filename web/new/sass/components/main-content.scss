@@ -1,0 +1,136 @@
+.main-content {
+  padding-left: 142px;
+
+  &__form {
+    .main-input {
+      width: 100%;
+      min-width: 835px;
+      padding: 30px 209px 35px 48px;
+      background: #fff;
+      box-shadow: 0 0 2px rgba(0, 0, 0, .12);
+      border-radius: 5px;
+      border: none;
+      font-family: $font-family--roboto-mono;
+      font-size: 18px;
+      line-height: 21px;
+      color: rgba(0, 0, 0, 0.78);
+
+      &.input-active {
+        box-shadow: 0 5.5px 5px rgba(0, 0, 0, .24)
+      }
+
+      &:focus {
+        outline: 0 none;
+      }
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: rgba(0, 0, 0, .38);
+      }
+
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: rgba(0, 0, 0, .38);
+      }
+
+      &::-ms-input-placeholder { /* IE 10+ */
+        color: rgba(0, 0, 0, .38);
+      }
+
+      &__wrapper {
+        position: relative;
+      }
+    }
+
+    .simple-input {
+      width: 100%;
+      max-width: 300px;
+      padding: 12px 12px 12px 0;
+      background: $body-bg;
+      border: none;
+      border-bottom: 1px solid $menu-item-active-color;
+      font-size: 14px;
+      line-height: 16px;
+      color: $menu-item-active-color;
+
+      &:first-of-type {
+        margin-right: 39px;
+      }
+
+      &:focus {
+        outline: 0 none;
+      }
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: $menu-item-active-color;
+      }
+
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: $menu-item-active-color;
+      }
+
+      &::-ms-input-placeholder { /* IE 10+ */
+        color: $menu-item-active-color;
+      }
+
+      &__wrapper {
+        margin-top: 10px;
+        margin-bottom: 14px;
+      }
+    }
+
+    button[type='submit'] {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 86px;
+      height: 86px;
+      background: url('images/icons/right-arrow.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      border: none;
+      outline: 0;
+      cursor: pointer;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+
+      &.btn-active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  .output-content {
+    display: none;
+  }
+
+  h2 {
+    margin-top: 45px;
+    margin-bottom: 20px;
+    font-family: $font-family--roboto-mono;
+    font-size: 24px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, .87);
+  }
+
+  table {
+    font-family: $font-family--roboto-mono;
+    font-size: 16px;
+    line-height: 30px;
+    color: rgba(0, 0, 0, .54);
+
+    th {
+      padding: 0 5px;
+      font-weight: 400;
+
+      &:first-of-type {
+        padding-left: 0;
+      }
+    }
+
+    td.pdl-20 {
+      padding-left: 20px;
+    }
+  }
+}
