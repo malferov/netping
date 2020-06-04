@@ -43,11 +43,11 @@ jobs:
         terraform apply -auto-approve -var="ip=${{ secrets.K8S_SERVER }}"
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
-        echo "::add-mask::$crt"
-        echo "::add-mask::$key"
 
     - name: ingress
       run: |
+        echo "::add-mask::$crt"
+        echo "::add-mask::$key"
         cd manifest
         ./kubeconfig.sh
         kubectl version
