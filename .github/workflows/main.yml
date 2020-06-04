@@ -21,8 +21,9 @@ env:
   TF_VAR_email: ${{ secrets.email }}
 
   K8S_SERVER: ${{ secrets.K8S_SERVER }}
-  K8S_USER: ${{ secrets.K8S_USER }}
-  K8S_PASS: ${{ secrets.K8S_PASS }}
+  K8S_CAD: ${{ secrets.K8S_CAD }}
+  K8S_CSD: ${{ secrets.K8S_CSD }}
+  K8S_CKD: ${{ secrets.K8S_CKD }}
 
 jobs:
   base:
@@ -33,13 +34,13 @@ jobs:
     - name: deps
       run: sudo pip install jinja2-cli
 
-    - name: tls
+    - name: tls and dns
       env:
         be_token: ${{ secrets.be_token }}
       run: |
         cd terraform
         ./init.sh
-        terraform apply -auto-approve
+        terraform apply -auto-approve -var="ip=${{ secrets.K8S_SERVER }}"
         echo "::set-env name=crt::$(terraform output crt)"
         echo "::set-env name=key::$(terraform output key)"
 
@@ -48,12 +49,6 @@ jobs:
         cd manifest
         ./kubeconfig.sh
         ./ingress.sh
-
-    - name: dns
-      run: |
-        cd terraform
-        ./ip.sh
-        terraform apply -auto-approve
 
   build-deploy:
     runs-on: ubuntu-latest

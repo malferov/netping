@@ -1,6 +1,12 @@
 #/bin/bash
 set -e
-kubectl delete -f ingress.yml
-kubectl delete -f secret.yml
-kubectl delete -f service.yml
-kubectl delete -f frontend.yml
+
+jinja2 ingress.yml -D app=$app -D domain=$domain |
+  kubectl delete -f -
+
+jinja2 secret.yml | kubectl delete -f -
+
+for s in web ping; do
+  jinja2 deployment.yml -D service=$s | kubectl delete -f -
+  jinja2 service.yml -D service=$s | kubectl delete -f -
+done
