@@ -14,7 +14,7 @@ spec:
     - host: {{ host }}
       http:
         paths:
-        - path: /*
+        - path: /
           backend:
             serviceName: web
             servicePort: 80
@@ -39,7 +39,7 @@ spec:
   'ping'
   ]
 %}
-        - path: /{{ service }}/*
+        - path: /{{ service }}/
           backend:
             serviceName: {{ service }}
             servicePort: 5000

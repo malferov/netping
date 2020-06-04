@@ -1,8 +1,12 @@
 #/bin/bash
 set -e
 
-jinja2 secret.yml -D crt=$crt -D key=$key |
-  kubectl apply -f -
+cd ../terraform
+jinja2 ../manifest/secret.yml -D crt=$(terraform output crt) -D key=$(terraform output key) \
+  > ../manifest/secret.rendered
 
-jinja2 ingress.yml -D app=$app -D domain=$domain |
-  kubectl apply -f -
+cd ../manifest
+kubectl apply -f secret.rendered
+
+jinja2 ingress.yml -D app=$app -D domain=$domain \
+  | kubectl apply -f -
