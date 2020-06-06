@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  src:  local('Roboto'), local('Roboto-Regular');
+  src:  url('fonts/Roboto-Regular.eot');
+  src:  url('fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+  url('fonts/Roboto-Regular.woff') format('woff'),
+  url('fonts/Roboto-Regular.ttf') format('truetype'),
+  url('fonts/Roboto-Regular.svg#Roboto-Regular') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src:  local('Roboto'), local('Roboto-Bold');
+  src:  url('fonts/Roboto-Bold.eot');
+  src:  url('fonts/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+  url('fonts/Roboto-Bold.woff') format('woff'),
+  url('fonts/Roboto-Bold.ttf') format('truetype'),
+  url('fonts/Roboto-Bold.svg#Roboto-Bold') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-weight: normal;
+  src:  local('RobotoMono'), local('RobotoMono-Regular');
+  src:  url('fonts/RobotoMono-Regular.eot');
+  src:  url('fonts/RobotoMono-Regular.eot?#iefix') format('embedded-opentype'),
+  url('fonts/RobotoMono-Regular.woff') format('woff'),
+  url('fonts/RobotoMono-Regular.ttf') format('truetype'),
+  url('fonts/RobotoMono-Regular.svg#RobotoMono-Regular') format('svg');
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-family;
+}
+
+h1 {
+  margin: 0;
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 16px;
+}

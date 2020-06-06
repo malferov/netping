@@ -1,0 +1,93 @@
+.menu-sidebar {
+  width: 100%;
+  max-width: 337px;
+  margin: 0;
+  background: #fff;
+  box-shadow: 0 9px 18px rgba(0, 0, 0, .18);
+  border-radius: 2px;
+  overflow: hidden;
+
+  .menu-list {
+    @include clearlist;
+  }
+
+  .menu-item {
+    border-bottom: 1px solid #e0e0e0;
+    transition: .3s all;
+
+    &.active {
+      background-color: $menu-item-active-color;
+
+      .menu-item__icon {
+        path {
+          fill: $menu-icon-hover-color;
+        }
+      }
+
+      .menu-item__title {
+        color: rgba(255, 255, 255, .87);
+      }
+
+      .menu-item__desc {
+        color: rgba(255, 255, 255, .5438)
+      }
+    }
+
+    &:hover {
+      background-color: $menu-item-hover-block-color;
+      transition: .3s all;
+
+      .menu-item__icon {
+        path {
+          fill: $menu-item-light-color;
+        }
+      }
+
+      .menu-item__title {
+        color: $menu-item-hover-title-color;
+      }
+
+      .menu-item__desc {
+        color: $menu-item-light-color
+      }
+    }
+
+    &__link {
+      min-height: 94px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 22px 9px 14px 17px;
+      text-decoration: none;
+    }
+
+    &__icon {
+      width: 100%;
+      height: 100%;
+      max-width: 45px;
+      max-height: 48px;
+      path {
+        fill: $menu-item-light-color;
+      }
+    }
+
+    &__content {
+      width: 100%;
+      max-width: 206px;
+      margin-left: 15px;
+    }
+
+    &__title {
+      margin-bottom: 5px;
+      font-size: 18px;
+      line-height: 21px;
+      color: rgba(0, 0, 0, .87);
+    }
+
+    &__desc {
+      font-size: 14px;
+      line-height: 16px;
+      color: $menu-item-light-color;
+    }
+  }
+}

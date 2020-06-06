@@ -1,0 +1,18 @@
+.footer {
+  flex: 0 0 auto;
+  padding: 14px 0;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(0, 0, 0, .87);
+
+  &__wrapper {
+    width: calc(100% - 60px);
+    max-width: 100%;
+    margin: 0 auto;
+
+    span {
+      margin-left: 30px;
+    }
+  }
+}
