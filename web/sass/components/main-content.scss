@@ -84,7 +84,7 @@
       transform: translateY(-50%);
       width: 86px;
       height: 86px;
-      background: url('../images/icons/right-arrow.svg');
+      background: url('images/right-arrow.svg');
       background-repeat: no-repeat;
       background-position: center;
       border: none;
@@ -102,7 +102,8 @@
   }
 
   .output-content {
-    display: none;
+    display: block;
+    font-family: $font-family--roboto-mono;
   }
 
   h2 {
@@ -114,23 +115,4 @@
     color: rgba(0, 0, 0, .87);
   }
 
-  table {
-    font-family: $font-family--roboto-mono;
-    font-size: 16px;
-    line-height: 30px;
-    color: rgba(0, 0, 0, .54);
-
-    th {
-      padding: 0 5px;
-      font-weight: 400;
-
-      &:first-of-type {
-        padding-left: 0;
-      }
-    }
-
-    td.pdl-20 {
-      padding-left: 20px;
-    }
-  }
 }
