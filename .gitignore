@@ -3,4 +3,3 @@
 *.tfvars
 *.rendered
 *.off
-ping/ping

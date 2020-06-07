@@ -36,7 +36,8 @@ spec:
       http:
         paths:
 {% for service in [
-  'ping'
+  'ping',
+  'whoami'
   ]
 %}
         - path: /{{ service }}/
