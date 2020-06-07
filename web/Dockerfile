@@ -1,5 +1,6 @@
 FROM python:slim AS tpl
 ARG app
+ARG sha
 ARG ver
 ARG date
 ENV app $app.org
@@ -13,7 +14,7 @@ RUN dart-sass/sass sass/main.scss main.css
 RUN pip install jinja2-cli
 COPY http.conf index.html app.js ./
 RUN jinja2 http.conf -D app=$app > http.conf.rendered
-RUN jinja2 index.html -D app=$app -D ver=$ver -D date="$date" > index.html.rendered
+RUN jinja2 index.html -D app=$app -D sha=$sha -D ver=$ver -D date="$date" > index.html.rendered
 RUN jinja2 app.js -D app=$app > app.js.rendered
 
 FROM nginx:alpine

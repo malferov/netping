@@ -3,8 +3,9 @@ name: CI
 on:
   push:
     branches:
-    - master
     - feature/*
+    tags:
+    - *
 
 env:
   app: netping
@@ -60,9 +61,11 @@ jobs:
 
     - name: set env
       run: |
-        ver=$(git rev-parse --short HEAD)
+        sha=$(git rev-parse --short HEAD)
+        ver=$(git describe --tag)
+        echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
-        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$ver"
+        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$sha"
         sudo pip install jinja2-cli
 
     - name: build image
@@ -70,6 +73,7 @@ jobs:
         cd ${{ matrix.service }}
         docker build . --tag $tag \
           --build-arg app=$app \
+          --build-arg sha=$sha \
           --build-arg ver=$ver \
           --build-arg date="$(date --rfc-3339=seconds)"
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
