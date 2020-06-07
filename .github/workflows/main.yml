@@ -20,7 +20,7 @@ env:
   TF_IN_AUTOMATION: 1
   TF_VAR_do_token: ${{ secrets.do_token }}
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-  TF_VAR_email: ${{ secrets.email }}
+  TF_VAR_email: malferov44@gmail.com
 
   K8S_SERVER: ${{ secrets.K8S_SERVER }}
   K8S_CAD: ${{ secrets.K8S_CAD }}
@@ -59,11 +59,13 @@ jobs:
         - ping
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 50
 
     - name: set env
       run: |
         git fetch --tags
-        sha=$(git rev-parse --short HEAD)
+        sha=$(git rev-parse --short HEAD^2)
         ver=$(git describe --tag)
         echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
