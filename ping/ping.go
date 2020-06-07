@@ -13,6 +13,7 @@ import (
 )
 
 var (
+	sha                 = "unknown"
 	version             = "dev"
 	date                = "unknown"
 	pod                 string
@@ -45,6 +46,7 @@ func main() {
 
 func getVersion(c *gin.Context) {
 	body := gin.H{
+		"sha":      sha,
 		"version":  version,
 		"date":     date,
 		"hostname": pod,
