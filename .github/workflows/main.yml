@@ -64,8 +64,12 @@ jobs:
 
     - name: set env
       run: |
-        git fetch --tags
-        sha=$(git rev-parse --short HEAD^2)
+        parent=0
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          git fetch --tags
+          parent=2
+        fi
+        sha=$(git rev-parse --short HEAD^$parent)
         ver=$(git describe --tag)
         echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
