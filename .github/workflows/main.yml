@@ -59,15 +59,15 @@ jobs:
         - ping
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: set env
       run: |
+        git fetch --tags
+        sha=$(git rev-parse --short HEAD)
         ver=$(git describe --tag)
+        echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
-        echo "::set-env name=sha::${{ github.sha }}"
-        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:${{ github.sha }}"
+        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$sha"
         sudo pip install jinja2-cli
 
     - name: build image
