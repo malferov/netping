@@ -65,7 +65,7 @@ jobs:
         #sha=$(git rev-parse --short HEAD)
         ver=$(git describe --tag)
         printenv
-        echo "::set-env name=sha::$sha"
+        #echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
         echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$sha"
         sudo pip install jinja2-cli
