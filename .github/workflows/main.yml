@@ -60,7 +60,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 20
+        fetch-depth: 0
 
     - name: set env
       run: |
