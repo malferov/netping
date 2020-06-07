@@ -7,9 +7,6 @@ import (
 	"github.com/golang/glog"
 	"net/http"
 	"os"
-	"os/exec"
-	"regexp"
-	"strconv"
 )
 
 var (
