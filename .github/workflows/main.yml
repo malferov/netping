@@ -62,8 +62,9 @@ jobs:
 
     - name: set env
       run: |
-        sha=$(git rev-parse --short HEAD)
+        #sha=$(git rev-parse --short HEAD)
         ver=$(git describe --tag)
+        printenv
         echo "::set-env name=sha::$sha"
         echo "::set-env name=ver::$ver"
         echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$sha"
