@@ -13,13 +13,13 @@ const app = new Vue({
         .then(data =>
           this.output = data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'))
         .catch(error => console.error(error))
-    },
-    init() {
-      fetch(this.api + '/whoami/ip')
-        .then(response => response.json())
-        .then(data =>
-          this.ip = data.message)
-        .catch(error => console.error(error))
     }
+  },
+  mounted() {
+    fetch(this.api + '/whoami/ip')
+      .then(response => response.json())
+      .then(data =>
+        this.ip = data.message)
+      .catch(error => console.error(error))
   }
 })
