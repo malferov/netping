@@ -1,16 +1,16 @@
-{% raw %}
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Netping | Enter Page</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="main.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Netping</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="main.css" />
     <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
+{% raw %}
     <div id="app" class="wrapper">
         <div class="content">
             <header class="header">
@@ -22,8 +22,8 @@
                             </a>
                         </h1>
                     </div>
-                    <span class="header__ip-address">
-                        Your public IP address 0.0.0.0
+                    <span class="header__ip-address" @click="init">
+                        Your public IP address {{ ip }}
                     </span>
                 </div>
             </header>

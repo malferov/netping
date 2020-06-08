@@ -24,3 +24,4 @@ COPY --from=tpl index.html.rendered /usr/share/nginx/html/index.html
 COPY --from=tpl app.js.rendered /usr/share/nginx/html/app.js
 COPY fonts /usr/share/nginx/html/fonts
 COPY images /usr/share/nginx/html/images
+COPY favicon.ico /usr/share/nginx/html/favicon.ico
