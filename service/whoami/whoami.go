@@ -58,7 +58,7 @@ func statusOk(c *gin.Context) {
 func getIp(c *gin.Context) {
 	glog.Info("whoami: begin")
 	c.JSON(http.StatusOK, gin.H{
-		"message": "0.0.0.0",
+		"message": c.ClientIP(),
 	})
 	glog.Infof("whoami: %d", http.StatusOK)
 }
