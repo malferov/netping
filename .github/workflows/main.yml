@@ -57,6 +57,7 @@ jobs:
         service:
         - web
         - ping
+        - whoami
     steps:
     - uses: actions/checkout@v2
       with:
@@ -78,7 +79,7 @@ jobs:
 
     - name: build image
       run: |
-        cd ${{ matrix.service }}
+        cd service/${{ matrix.service }}
         docker build . --tag $tag \
           --build-arg app=$app \
           --build-arg sha=$sha \

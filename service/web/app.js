@@ -4,6 +4,7 @@ const app = new Vue({
     api: 'https://api.{{ app }}',
     hostname: '',
     output: '',
+    ip: '',
   },
   methods: {
     main() {
@@ -13,5 +14,12 @@ const app = new Vue({
           this.output = data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'))
         .catch(error => console.error(error))
     }
+  },
+  mounted() {
+    fetch(this.api + '/whoami/ip')
+      .then(response => response.json())
+      .then(data =>
+        this.ip = data.message)
+      .catch(error => console.error(error))
   }
 })
