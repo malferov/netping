@@ -5,14 +5,24 @@ const app = new Vue({
     hostname: '',
     output: '',
     ip: '',
+    selected: 'ping',
   },
   methods: {
     main() {
-      fetch(this.api + '/ping/v1/' + this.hostname)
+      fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
         .then(response => response.json())
         .then(data =>
           this.output = data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'))
-        .catch(error => console.error(error))
+        .catch(error => {
+          console.error(error);
+          this.output = '404 Not Found';
+        })
+    },
+    active(index) {
+      if (index != this.selected) {
+        this.output = '';
+        this.selected = index;
+      }
     }
   },
   mounted() {
