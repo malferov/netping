@@ -16,7 +16,7 @@
     transition: .3s all;
 
     &.active {
-      background-color: $menu-item-active-color;
+      background-color: $menu-active-color;
 
       .menu-item__icon {
         path {
@@ -30,6 +30,24 @@
 
       .menu-item__desc {
         color: rgba(255, 255, 255, .5438)
+      }
+
+      &:hover {
+        background-color: $menu-active-hover-color;
+
+        .menu-item__icon {
+          path {
+            fill: $menu-icon-hover-color;
+          }
+        }
+
+        .menu-item__title {
+          color: rgba(255, 255, 255, .87);
+        }
+
+        .menu-item__desc {
+          color: rgba(255, 255, 255, .5438)
+        }
       }
     }
 
