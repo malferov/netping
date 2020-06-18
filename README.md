@@ -2,16 +2,16 @@
 
 ![CI](https://github.com/malferov/netping/workflows/CI/badge.svg)
 
-- Ping - shows how long it takes for packets to reach host
-- Traceroute - traces the route of packets to destination host from our service
-- DNS lookup - look up DNS records
-- Port check - tests if TCP port is opened on specified IP
-- Reverse lookup – gets hostname by IP address
+- Ping - used to test the reachability of a host and measures the round-trip time
+- DNS lookup - used to obtain domain name or IP address mapping, or other DNS records
+- Port check - used to determine whether specific port is up and running
+- Traceroute - indicates the route and measures transit delays
+- Reverse lookup – determines the domain name associated with an IP address
 - Proxy checker – detects a proxy server
-- Country by IP – detects country by IP or hostname
-- Network calculator – calculates subnet range by network mask
-- WHOIS – lists contact info for an IP or domain
-- Bandwidth meter – detects your download speed from our server
+- Country by IP – detects country by IP address or hostname
+- Network calculator – used to enumerate addresses belong to subnet
+- WHOIS – shows the registered users or assignees of a domain name
+- Bandwidth meter – measures the maximum rate of data transfer
 
 ## local
 ```
