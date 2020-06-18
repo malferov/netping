@@ -73,7 +73,7 @@ func dns(c *gin.Context) {
 	if !validip(hostname) && !validhn(hostname) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed ip address or hostname"})
 	} else {
-		out, err := exec.Command("dig", "any", "+noall", "+answer", hostname).CombinedOutput()
+		out, err := exec.Command("dig", "@8.8.4.4", "any", "+noall", "+answer", hostname).CombinedOutput()
 		if err != nil {
 			glog.Error("dns: " + err.Error())
 		}
