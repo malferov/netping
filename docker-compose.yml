@@ -5,9 +5,9 @@ services:
       context: service/web/.
       args:
         app: netping
-        sha: "unknown"
-        ver: "dev"
-        date: "2020-06-07 16:00:00+02:00"
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
         min:
     ports:
       - "80:80"
@@ -15,7 +15,17 @@ services:
     build:
       context: service/ping/.
       args:
-        ver: "dev"
-        date: "2020-06-07 16:00:00+02:00"
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
     ports:
       - "5000:5000"
+  dns:
+    build:
+      context: service/dns/.
+      args:
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
+    ports:
+      - "5001:5000"

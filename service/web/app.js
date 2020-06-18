@@ -12,7 +12,7 @@ const app = new Vue({
       fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
         .then(response => response.json())
         .then(data =>
-          this.output = data.message.replace(/(?:\r\n|\r|\n)/g, '<br>'))
+          this.output = data.message)
         .catch(error => {
           console.error(error);
           this.output = '404 Not Found';

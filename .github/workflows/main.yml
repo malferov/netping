@@ -56,8 +56,9 @@ jobs:
       matrix:
         service:
         - web
-        - ping
         - whoami
+        - ping
+        - dns
     steps:
     - uses: actions/checkout@v2
       with:
