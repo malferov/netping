@@ -226,10 +226,7 @@
                     </div>
                 </form>
 
-                <div v-if="output" class="output-content">
-                    <h2>Output</h2>
-                    <div id="output" v-html="output">
-                </div>
+                <div v-if="output" class="output-content"><h2>Output</h2>{{ output }}</div>
             </div>
             </main>
         </div>
