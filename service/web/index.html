@@ -49,12 +49,12 @@
                                             Ping
                                         </div>
                                         <div class="menu-item__desc">
-                                            Shows how long it takes for packets to reach host
+                                            Used to test the reachability of a host and measures the round-trip time
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            <li class="menu-item" @click="active(2)" :class="{active:selected == 2}">
+                            <li class="menu-item" @click="active('dns')" :class="{active:selected == 'dns'}">
                                 <a class="menu-item__link" href="#">
                                     <svg class="menu-item__icon" width="45" height="46" viewBox="0 0 45 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.5 45.0386C10.0929 45.0386 0 34.9457 0 22.5386C0 10.1314 10.0929 0.0385742 22.5 0.0385742C34.9071 0.0385742 45 10.1314 45 22.5386C45 34.9457 34.9071 45.0386 22.5 45.0386ZM22.5 2.35286C11.3657 2.35286 2.31429 11.4043 2.31429 22.5386C2.31429 33.6729 11.3657 42.7243 22.5 42.7243C33.6343 42.7243 42.6857 33.6729 42.6857 22.5386C42.6857 11.4043 33.6343 2.35286 22.5 2.35286Z" fill="#757575"/>
@@ -73,7 +73,7 @@
                                             DNS lookup
                                         </div>
                                         <div class="menu-item__desc">
-                                            Look up DNS record
+                                            Used to obtain domain name or IP address mapping, or other DNS records
                                         </div>
                                     </div>
                                 </a>
