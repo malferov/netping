@@ -15,7 +15,7 @@ const app = new Vue({
           this.output = data.message)
         .catch(error => {
           console.error(error);
-          this.output = '404 Not Found';
+          this.output = '501 Not Implemented';
         })
     },
     active(index) {
