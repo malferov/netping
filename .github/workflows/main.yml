@@ -47,6 +47,7 @@ jobs:
       run: |
         cd manifest
         ./kubeconfig.sh
+        kubectl version --client
 
   build-deploy:
     runs-on: ubuntu-latest
