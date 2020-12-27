@@ -48,7 +48,8 @@ jobs:
         cd manifest
         ./kubeconfig.sh
         kubectl version --client
-        kubectl config view --raw -o jsonpath='{.clusters[?(@.name == "kube")].cluster.certificate-authority-data}'
+        #kubectl config view --raw -o jsonpath='{.clusters[?(@.name == "kube")].cluster.certificate-authority-data}'
+        kubectl version
 
   build-deploy:
     runs-on: ubuntu-latest
