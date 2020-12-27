@@ -47,7 +47,9 @@ jobs:
       run: |
         cd manifest
         ./kubeconfig.sh
-        ./ingress.sh
+        kubectl version
+        kubectl get nodes
+        #./ingress.sh
 
   build-deploy:
     runs-on: ubuntu-latest
