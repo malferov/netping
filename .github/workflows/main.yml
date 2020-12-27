@@ -14,7 +14,6 @@ env:
   TF_VAR_app: netping
   TF_VAR_domain: org
   registry: docker.pkg.github.com
-  actor: ${{ github.actor }}
 
   TF_INPUT: 0
   TF_IN_AUTOMATION: 1
@@ -72,10 +71,9 @@ jobs:
           parent=2
         fi
         sha=$(git rev-parse --short HEAD^$parent)
-        ver=$(git describe --tag)
-        echo "::set-env name=sha::$sha"
-        echo "::set-env name=ver::$ver"
-        echo "::set-env name=tag::$registry/${{ github.repository }}/${{ matrix.service }}:$sha"
+        echo "sha=$sha" >> $GITHUB_ENV
+        echo "ver=$(git describe --tag)" >> $GITHUB_ENV
+        echo "tag=$registry/${{ github.repository }}/${{ matrix.service }}:$sha" >> $GITHUB_ENV
         sudo pip install jinja2-cli
 
     - name: build image
@@ -87,7 +85,7 @@ jobs:
           --build-arg ver=$ver \
           --build-arg date="$(date --rfc-3339=seconds)" \
           --build-arg min="min."
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u $actor --password-stdin
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login $registry -u ${{ github.actor }} --password-stdin
         docker push $tag
 
     - name: deploy service
