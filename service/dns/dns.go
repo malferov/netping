@@ -77,7 +77,6 @@ func dns(c *gin.Context) {
 			"dig", "+noall", "+answer",
 			hostname, "A",
 			hostname, "AAAA",
-			hostname, "ALIAS",
 			hostname, "CAA",
 			hostname, "CERT",
 			hostname, "CNAME",
