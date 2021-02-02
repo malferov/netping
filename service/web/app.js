@@ -6,6 +6,7 @@ const app = new Vue({
     output: '',
     ip: '',
     selected: 'ping',
+    contact: false
   },
   methods: {
     main() {

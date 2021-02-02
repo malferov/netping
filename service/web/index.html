@@ -36,10 +36,10 @@
                     <span class="header__ip-address">Your public IP address is <b>{{ ip }}</b></span>
                 </div>
             </header>
-            <main class="content-wrapper">
+            <main class="content-wrapper" v-if="!contact">
             <aside class="menu-sidebar">
                 <ul class="menu-list">
-                            <li class="menu-item" @click="active('ping')" :class="{active:selected == 'ping'}">
+                            <li class="menu-item" v-on:click="active('ping')" :class="{active:selected == 'ping'}">
                                 <a class="menu-item__link" href="#">
                                     <svg class="menu-item__icon" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M27.1336 41.2633C26.7913 41.3513 26.4294 41.4295 25.9795 41.5078C25.1189 41.674 24.5516 42.4956 24.7081 43.3563C24.7765 43.7573 25.0113 44.1289 25.3536 44.3637C25.7057 44.6082 26.136 44.706 26.5566 44.6277C27.0358 44.5299 27.4857 44.4321 27.9063 44.3343C28.7474 44.1191 29.2658 43.2585 29.0604 42.4076C28.8452 41.5665 27.9845 41.0481 27.1336 41.2633Z" fill="#757575"/>
@@ -57,7 +57,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="menu-item" @click="active('dns')" :class="{active:selected == 'dns'}">
+                            <li class="menu-item" v-on:click="active('dns')" :class="{active:selected == 'dns'}">
                                 <a class="menu-item__link" href="#">
                                     <svg class="menu-item__icon" width="45" height="46" viewBox="0 0 45 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.5 45.0386C10.0929 45.0386 0 34.9457 0 22.5386C0 10.1314 10.0929 0.0385742 22.5 0.0385742C34.9071 0.0385742 45 10.1314 45 22.5386C45 34.9457 34.9071 45.0386 22.5 45.0386ZM22.5 2.35286C11.3657 2.35286 2.31429 11.4043 2.31429 22.5386C2.31429 33.6729 11.3657 42.7243 22.5 42.7243C33.6343 42.7243 42.6857 33.6729 42.6857 22.5386C42.6857 11.4043 33.6343 2.35286 22.5 2.35286Z" fill="#757575"/>
@@ -77,7 +77,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="menu-item" @click="active(3)" :class="{active:selected == 3}">
+                            <li class="menu-item" v-on:click="active(3)" :class="{active:selected == 3}">
                                 <a class="menu-item__link" href="#">
                                     <svg class="menu-item__icon" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.5 45C10.0955 45 0 34.9045 0 22.5C0 10.0955 10.0955 0 22.5 0C34.9045 0 45 10.0955 45 22.5C45 34.9045 34.9045 45 22.5 45ZM22.5 2.30901C11.3654 2.30901 2.30901 11.3654 2.30901 22.5C2.30901 33.6346 11.3654 42.691 22.5 42.691C33.6346 42.691 42.691 33.6346 42.691 22.5C42.691 11.3654 33.6346 2.30901 22.5 2.30901Z" fill="#757575"/>
@@ -103,18 +103,19 @@
                         <button type="submit" class="main-btn btn-active" @click="main"></button>
                     </div>
                 </form>
-
                 <div v-if="output" class="output-content"><h2>Output</h2>{{ output }}</div>
             </div>
             </main>
+            <h1 v-if="contact">Contact form</h1>
         </div>
 {% endraw %}
         <footer class="footer">
             <div class="footer__wrapper">
                 <span>netping.org © 2021</span>
                 <span hidden>sha {{ sha }}</span>
-                <span>version {{ ver }}</span>
+                <span>version 0.1.0</span>
                 <span hidden>date {{ date }}</span>
+                <a v-on:click="contact = !contact" href="#">contact</a>
             </div>
         </footer>
     </div>
