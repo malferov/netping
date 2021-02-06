@@ -10,7 +10,7 @@ ENV sass dart-sass-1.26.8-linux-x64.tar.gz
 ADD https://github.com/sass/dart-sass/releases/download/1.26.8/$sass .
 RUN tar -xzf $sass
 COPY sass sass
-RUN dart-sass/sass sass/main.scss main.css
+RUN dart-sass/sass sass/main.scss main.css --style compressed --sourcemap=none
 
 RUN pip install jinja2-cli
 COPY http.conf index.html app.js ./
