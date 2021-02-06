@@ -100,13 +100,21 @@
                 <form v-on:submit.prevent class="main-content__form">
                     <div class="main-input__wrapper">
                         <input type="text" v-model.text="hostname" placeholder="Еnter IP address or hostname" size="28" class="main-input input-active"/>
-                        <button type="submit" class="main-btn btn-active" @click="main"></button>
+                        <button type="submit" class="main-btn btn-active" v-on:click="main"></button>
                     </div>
                 </form>
                 <div v-if="output" class="output-content"><h2>Output</h2>{{ output }}</div>
             </div>
             </main>
-            <h1 v-if="contact">Contact form</h1>
+            <div v-if="contact">
+                <h2 >Contact</h2>
+                <form>
+                    <input type="text" value="Subject"/><br>
+                    <input type="text" value="e-mail"/><br>
+                    <input type="text" value="Message"/><br>
+                    <button type="submit" v-on:click="contact = false">Send message</button>
+                </form>
+            </div>
         </div>
 {% endraw %}
         <footer class="footer">
@@ -115,7 +123,7 @@
                 <span hidden>sha {{ sha }}</span>
                 <span>version 0.1.0</span>
                 <span hidden>date {{ date }}</span>
-                <a v-on:click="contact = !contact" href="#">contact</a>
+                <a v-on:click="contact = true" href="#">contact</a>
             </div>
         </footer>
     </div>
