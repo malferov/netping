@@ -38,7 +38,8 @@ spec:
 {% for service in [
   'whoami',
   'ping',
-  'dns'
+  'dns',
+  'send'
   ]
 %}
         - path: /{{ service }}/

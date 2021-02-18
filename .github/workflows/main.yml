@@ -58,6 +58,7 @@ jobs:
         - whoami
         - ping
         - dns
+        - send
     steps:
     - uses: actions/checkout@v2
       with:

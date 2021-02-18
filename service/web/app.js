@@ -6,7 +6,10 @@ const app = new Vue({
     output: '',
     ip: '',
     selected: 'ping',
-    contact: false
+    contact: false,
+    subject: '',
+    message: '',
+    email: ''
   },
   methods: {
     main() {
@@ -24,6 +27,24 @@ const app = new Vue({
         this.output = '';
         this.selected = index;
       }
+    },
+    send() {
+      fetch(this.api + '/send', {
+        method: 'post',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            "subject": this.subject,
+            "message": this.message,
+            "email": this.email
+          })
+        })
+        .then(response => response.json())
+        .catch(error => {
+          console.error(error);
+        })
+      this.contact = false;
     }
   },
   mounted() {

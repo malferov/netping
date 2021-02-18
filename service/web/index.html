@@ -106,13 +106,13 @@
                 <div v-if="output" class="output-content"><h2>Output</h2>{{ output }}</div>
             </div>
             </main>
-            <div v-if="contact">
-                <h2 >Contact</h2>
-                <form>
-                    <input type="text" value="Subject"/><br>
-                    <input type="text" value="e-mail"/><br>
-                    <input type="text" value="Message"/><br>
-                    <button type="submit" v-on:click="contact = false">Send message</button>
+            <div v-if="contact" class=form-wrapper>
+                <form @submit="send" action=/ class=contact-form>
+                    <div class=contact-form__title>Contact</div>
+                    <fieldset class=contact-form__row><input v-model="subject" class=contact-form__input placeholder="Message subject" required></fieldset>
+                    <fieldset class=contact-form__row><textarea v-model="message" class=contact-form__textarea placeholder="How can we help you today?" required></textarea></fieldset>
+                    <fieldset class=contact-form__row><input v-model="email" class=contact-form__input type=email placeholder="Your email address" required></fieldset>
+                    <button class=contact-form__btn name=submit type=submit>Send message</button>
                 </form>
             </div>
         </div>
