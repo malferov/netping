@@ -73,11 +73,13 @@ func submit(c *gin.Context) {
 			"error": err.Error(),
 		})
 	} else {
-		msg := []byte("From: " + pld.Email + "\r\n" +
+		msg := []byte("From: send@netping.org\r\n" +
 			"To: " + email + "\r\n" +
-			"Subject: " + pld.Subject + "\r\n" +
+			"Subject: message from netping.org\r\n" +
 			"\r\n" +
-			pld.Message + "\r\n")
+                        "Subject: " + pld.Subject + "\r\n" +
+			"Message: " + pld.Message + "\r\n" +
+                        "Email: " + pld.Email + "\r\n")
 		err := smtp.SendMail("gmail-smtp-in.l.google.com:25", nil, pld.Email, []string{email}, msg)
 		if err != nil {
 			glog.Error("Can't send email" + err.Error())
