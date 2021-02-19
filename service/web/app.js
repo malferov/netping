@@ -44,6 +44,9 @@ const app = new Vue({
         .catch(error => {
           console.error(error);
         })
+      this.subject = '';
+      this.message = '';
+      this.email = '';
       this.contact = false;
     }
   },

@@ -6,7 +6,7 @@ if [ "$1" = "web" ]; then
   port=80
 fi
 
-jinja2 deployment.yml -D service=$1 -D port=$port -D tag=$tag |
+jinja2 deployment.yml -D service=$1 -D port=$port -D tag=$tag -D email=$email |
   kubectl apply -f -
 
 jinja2 service.yml -D service=$1 -D port=$port |

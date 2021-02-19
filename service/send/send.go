@@ -20,6 +20,7 @@ var (
 	version = "dev"
 	date    = "unknown"
 	pod     string
+	email   string
 )
 
 func setupRouter() *gin.Engine {
@@ -40,6 +41,7 @@ func main() {
 	flag.Parse()
 
 	pod, _ = os.Hostname()
+	email = os.Getenv("EMAIL")
 
 	router := setupRouter()
 	router.Run(":" + port)
@@ -70,11 +72,28 @@ func submit(c *gin.Context) {
 			"error": err.Error(),
 		})
 	} else {
+		/*		auth := smtp.PlainAuth("", "user@example.com", "password", "mail.example.com")
+
+				to := []string{"@example.net"}
+				msg := []byte("To: recipient@example.net\r\n" +
+					"Subject: discount Gophers!\r\n" +
+					"\r\n" +
+					"This is the email body.\r\n")
+				//      "subject": pld.Subject,
+				err := smtp.SendMail("gmail-smtp-in.l.google.com:25", auth, "sender@example.org", to, msg)
+				if err != nil {
+					glog.Error("Can't send email" + err.Error())
+					c.JSON(http.StatusServerError, gin.H{
+						"message": "can't send email",
+						"error":   err.Error(),
+					})*/
+		//} else {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "submitted",
 			"subject": pld.Subject,
+			"rcpt":    email,
 		})
+		//}
 	}
-
 	glog.Infof("submit: %d", http.StatusOK)
 }
