@@ -1,0 +1,128 @@
+.form-wrapper { // delete this
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+// Form styles
+.contact-form {
+    margin-top: 70px;
+    max-width: 580px;
+    font-family: 'Roboto Mono';
+
+    &__title {
+        font-size: 24px;
+        line-height: 32px;
+        color: rgba(0, 0, 0, .87);
+    }
+
+    &__row {
+        border: none;
+        margin: 32px 0 0;
+        padding: 0;
+    }
+
+    &__input,
+    &__textarea {
+        width: 100%;
+        padding: 13px 20px;
+        border: none;
+        background: #ffffff;
+        box-shadow: 0px 5.5px 5px rgba(0, 0, 0, .24);
+        border-radius: 5px;
+        resize: none;
+        font-size: 18px;
+        line-height: 21px;
+        color: rgba(0, 0, 0, .78);
+        outline: none;
+
+        &::placeholder {
+            font-family: 'Roboto Mono';
+            font-size: 18px;
+            line-height: 24px;
+            color: rgba(0, 0, 0, .38);
+        }
+    }
+
+    &__textarea {
+        height: 147px;
+    }
+
+    &__checkbox {
+        position: absolute;
+        opacity: 0;
+    }
+
+    &__checkbox + label {
+        font-family: 'Roboto';
+        position: relative;
+        cursor: pointer;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #757575;
+        display: block;
+        position: relative;
+        padding: 0 0 0 25px;
+    }
+
+    &__checkbox + label:before {
+        content: '';
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 16px;
+        height: 16px;
+        background: #ffffff;
+        border: 1px solid #c7c7c7;
+        border-radius: 3px;
+        position: absolute;
+        left: 0;
+        top: -1px;
+    }
+
+    &__checkbox:hover + label:before {
+        background: transparent;
+    }
+
+    &__checkbox:checked + label:before {
+        background: #0082ff;
+        border: 1px solid #0082ff;
+    }
+
+    &__checkbox:checked + label:after {
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 6px;
+        background: white;
+        width: 2px;
+        height: 2px;
+        box-shadow:
+                2px 0 0 white,
+                4px 0 0 white,
+                4px -2px 0 white,
+                4px -4px 0 white,
+                4px -6px 0 white,
+                4px -8px 0 white;
+        transform: rotate(45deg);
+    }
+
+    &__btn {
+        margin: 30px auto 0;
+        background: #0082ff;
+        box-shadow: 0 5.5px 5px rgba(0, 130, 255, .29);
+        border-radius: 5px;
+        padding: 15px 35px 11px;
+        display: block;
+        outline: none;
+        border: none;
+        font-size: 18px;
+        line-height: 21px;
+        color: rgba(255, 255, 255, .87);
+
+        &:hover {
+            cursor: pointer;
+            background: #55b3f3;
+        }
+    }
+}

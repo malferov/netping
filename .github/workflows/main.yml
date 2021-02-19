@@ -19,7 +19,7 @@ env:
   TF_IN_AUTOMATION: 1
   TF_VAR_do_token: ${{ secrets.do_token }}
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
-  TF_VAR_email: malferov44@gmail.com
+  TF_VAR_email: ${{ secrets.EMAIL }}
 
   K8S_SERVER: ${{ secrets.K8S_SERVER }}
   K8S_CA: ${{ secrets.K8S_CA }}
@@ -58,6 +58,7 @@ jobs:
         - whoami
         - ping
         - dns
+        - send
     steps:
     - uses: actions/checkout@v2
       with:
@@ -74,6 +75,7 @@ jobs:
         echo "sha=$sha" >> $GITHUB_ENV
         echo "ver=$(git describe --tag)" >> $GITHUB_ENV
         echo "tag=$registry/${{ github.repository }}/${{ matrix.service }}:$sha" >> $GITHUB_ENV
+        echo "email=${{ secrets.EMAIL }}" >> $GITHUB_ENV
         sudo pip install jinja2-cli
 
     - name: build image

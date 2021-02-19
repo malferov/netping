@@ -20,6 +20,8 @@ spec:
         env:
         - name: GIN_MODE
           value: release
+        - name: EMAIL
+          value: {{ email }}
         ports:
         - containerPort: {{ port }}
       imagePullSecrets:
