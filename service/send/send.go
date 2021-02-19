@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	"net/http"
+	"net/smtp"
 	"os"
 )
 
@@ -72,28 +73,22 @@ func submit(c *gin.Context) {
 			"error": err.Error(),
 		})
 	} else {
-		/*		auth := smtp.PlainAuth("", "user@example.com", "password", "mail.example.com")
-
-				to := []string{"@example.net"}
-				msg := []byte("To: recipient@example.net\r\n" +
-					"Subject: discount Gophers!\r\n" +
-					"\r\n" +
-					"This is the email body.\r\n")
-				//      "subject": pld.Subject,
-				err := smtp.SendMail("gmail-smtp-in.l.google.com:25", auth, "sender@example.org", to, msg)
-				if err != nil {
-					glog.Error("Can't send email" + err.Error())
-					c.JSON(http.StatusServerError, gin.H{
-						"message": "can't send email",
-						"error":   err.Error(),
-					})*/
-		//} else {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "submitted",
-			"subject": pld.Subject,
-			"rcpt":    email,
-		})
-		//}
+		msg := []byte("From: " + pld.Email + "\r\n" +
+			"To: " + email + "\r\n" +
+			"Subject: " + pld.Subject + "\r\n" +
+			"\r\n" +
+			pld.Message + "\r\n")
+		err := smtp.SendMail("gmail-smtp-in.l.google.com:25", nil, pld.Email, []string{email}, msg)
+		if err != nil {
+			glog.Error("Can't send email" + err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": err.Error(),
+			})
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"message": "submitted",
+			})
+		}
 	}
 	glog.Infof("submit: %d", http.StatusOK)
 }
