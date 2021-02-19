@@ -5,6 +5,7 @@ ARG date
 WORKDIR /go/src
 COPY send.go .
 RUN go mod init send
+RUN go mod tidy
 RUN go build -o send -ldflags "-X main.sha=$sha -X main.version=$ver -X 'main.date=$date'"
 
 FROM centos
