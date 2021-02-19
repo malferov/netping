@@ -26,7 +26,7 @@ func setupRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(cors.Default())
 	r.GET("/", statusOk)
-	g := r.Group("/dns")
+	g := r.Group("/send")
 	{
 		g.GET("/version", getVersion)
 		g.POST("/submit", submit)
