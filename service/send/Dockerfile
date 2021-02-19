@@ -8,7 +8,7 @@ RUN go mod init send
 RUN go mod tidy
 RUN go build -o send -ldflags "-X main.sha=$sha -X main.version=$ver -X 'main.date=$date'"
 
-FROM centos
+FROM alpine
 EXPOSE 5000
 COPY --from=build /go/src/send .
 ENTRYPOINT ["./send"]

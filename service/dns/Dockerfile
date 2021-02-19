@@ -4,9 +4,8 @@ ARG ver
 ARG date
 WORKDIR /go/src
 COPY dns.go .
-RUN go get github.com/gin-gonic/gin
-RUN go get github.com/golang/glog
-RUN go get github.com/gin-contrib/cors
+RUN go mod init dns
+RUN go mod tidy
 RUN go build -o dns -ldflags "-X main.sha=$sha -X main.version=$ver -X 'main.date=$date'"
 
 FROM centos
