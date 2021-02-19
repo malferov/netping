@@ -1,4 +1,4 @@
-FROM golang AS build
+FROM golang:1.15 AS build
 ARG sha
 ARG ver
 ARG date
