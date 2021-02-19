@@ -29,7 +29,7 @@ const app = new Vue({
       }
     },
     send() {
-      fetch(this.api + '/send', {
+      fetch(this.api + '/send/submit', {
         method: 'post',
           headers: {
             'Content-Type' : 'application/json'
