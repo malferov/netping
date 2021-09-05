@@ -22,6 +22,7 @@ var (
 	date    = "unknown"
 	pod     string
 	email   string
+	from    = "send@netping.org"
 )
 
 func setupRouter() *gin.Engine {
@@ -73,14 +74,14 @@ func submit(c *gin.Context) {
 			"error": err.Error(),
 		})
 	} else {
-		msg := []byte("From: send@netping.org\r\n" +
+		msg := []byte("From: " + from + "\r\n" +
 			"To: " + email + "\r\n" +
 			"Subject: message from netping.org\r\n" +
 			"\r\n" +
-                        "Subject: " + pld.Subject + "\r\n" +
+			"Subject: " + pld.Subject + "\r\n" +
 			"Message: " + pld.Message + "\r\n" +
-                        "Email: " + pld.Email + "\r\n")
-		err := smtp.SendMail("gmail-smtp-in.l.google.com:25", nil, pld.Email, []string{email}, msg)
+			"Email: " + pld.Email + "\r\n")
+		err := smtp.SendMail("gmail-smtp-in.l.google.com:25", nil, from, []string{email}, msg)
 		if err != nil {
 			glog.Error("Can't send email" + err.Error())
 			c.JSON(http.StatusInternalServerError, gin.H{
