@@ -37,7 +37,8 @@ const app = new Vue({
           body: JSON.stringify({
             "subject": this.subject,
             "message": this.message,
-            "email": this.email
+            "email": this.email,
+            "channel": "slack"
           })
         })
         .then(response => response.json())

@@ -76,6 +76,7 @@ jobs:
         echo "ver=$(git describe --tag)" >> $GITHUB_ENV
         echo "tag=$registry/${{ github.repository }}/${{ matrix.service }}:$sha" >> $GITHUB_ENV
         echo "email=${{ secrets.EMAIL }}" >> $GITHUB_ENV
+        echo "bot_token=${{ secrets.BOT_TOKEN }}" >> $GITHUB_ENV
         sudo pip install jinja2-cli
 
     - name: build image
