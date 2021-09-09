@@ -22,6 +22,8 @@ spec:
           value: release
         - name: EMAIL
           value: {{ email }}
+        - name: BOT_TOKEN
+          value: {{ bot_token }}
         ports:
         - containerPort: {{ port }}
       imagePullSecrets:

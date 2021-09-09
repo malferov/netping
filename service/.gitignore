@@ -3,3 +3,4 @@ ping/ping
 send/send
 whoami/whoami
 go.sum
+go.mod
