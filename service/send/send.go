@@ -94,12 +94,13 @@ func submit(c *gin.Context) {
 		} else if pld.Channel == "slack" {
 			var request *http.Request
 			var response *http.Response
-			var post struct {
+			post := struct {
 				Channel string `json:"channel"`
 				Text    string `json:"text"`
+			}{
+				Channel: channel,
+				Text:    string(msg),
 			}
-			post.Channel = channel
-			post.Text = string(msg)
 			var jsonPost []byte
 			jsonPost, err = json.Marshal(post)
 			if err != nil {
