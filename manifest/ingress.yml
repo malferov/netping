@@ -10,6 +10,7 @@ spec:
   - hosts:
     - {{ host }}
     secretName: tls
+  ingressClassName: nginx
   rules:
     - host: {{ host }}
       http:
@@ -31,6 +32,7 @@ spec:
   - hosts:
     - {{ api }}
     secretName: tls
+  ingressClassName: nginx
   rules:
     - host: {{ api }}
       http:
