@@ -1,3 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+spec:
+  tls:
+    - hosts:
+        - {{ domain }}
+      secretName: tls
+  ingressClassName: nginx
+  rules:
+    - host: {{ domain }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
+
+
+
 {% set host = app + '.' + domain %}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -16,9 +41,12 @@ spec:
       http:
         paths:
         - path: /
+          pathType: Prefix
           backend:
-            serviceName: web
-            servicePort: 80
+            service:
+              name: web
+              port:
+                number: 80
 ---
 {% set api = 'api.' + host %}
 apiVersion: networking.k8s.io/v1
@@ -45,7 +73,10 @@ spec:
   ]
 %}
         - path: /{{ service }}/
+          pathType: Prefix
           backend:
-            serviceName: {{ service }}
-            servicePort: 5000
+            service:
+              name: {{ service }}
+              port:
+                number: 5000
 {% endfor %}
