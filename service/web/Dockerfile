@@ -3,7 +3,6 @@ ARG app
 ARG sha
 ARG ver
 ARG date
-ARG min
 ENV app ${app}.org
 ENV sass dart-sass-1.32.6-linux-x64.tar.gz
 
@@ -15,14 +14,12 @@ RUN dart-sass/sass sass/main.scss main.css --style compressed --no-source-map
 RUN pip install jinja2-cli
 COPY http.conf index.html app.js ./
 RUN jinja2 http.conf -D app=$app > http.conf.rendered
-RUN jinja2 index.html -D app=$app -D sha=$sha -D ver=$ver -D date="$date" \
-  -D min=$min > index.html.rendered
+RUN jinja2 index.html -D app=$app -D sha=$sha -D ver=$ver -D date="$date" > index.html.rendered
 RUN jinja2 app.js -D app=$app > app.js.rendered
 
 FROM nginx:alpine
-ARG min
 WORKDIR /usr/share/nginx/html
-ADD https://vuejs.org/js/vue.${min}js .
+ADD https://unpkg.com/vue@3.2.30/dist/vue.global.prod.js vue.js
 RUN chmod +r *.js
 COPY --from=tpl main.css main.css
 COPY --from=tpl http.conf.rendered /etc/nginx/conf.d/http.conf
