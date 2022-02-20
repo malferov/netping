@@ -1,15 +1,16 @@
-const app = new Vue({
-  el: '#app',
-  data: {
-    api: 'https://api.{{ app }}',
-    hostname: '',
-    output: '',
-    ip: '',
-    selected: 'ping',
-    contact: false,
-    subject: '',
-    message: '',
-    email: ''
+const app = Vue.createApp({
+  data() {
+    return {
+      api: 'https://api.{{ app }}',
+      hostname: '',
+      output: '',
+      ip: '',
+      selected: 'ping',
+      contact: false,
+      subject: '',
+      message: '',
+      email: ''
+    }
   },
   methods: {
     main() {
@@ -59,3 +60,5 @@ const app = new Vue({
       .catch(error => console.error(error))
   }
 })
+
+app.mount('#app')

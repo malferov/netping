@@ -8,7 +8,6 @@ services:
         sha: ${sha}
         ver: ${ver}
         date: ${date}
-        min:
     ports:
       - "80:80"
   ping:
