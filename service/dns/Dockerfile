@@ -8,7 +8,7 @@ RUN go mod init dns
 RUN go mod tidy
 RUN go build -o dns -ldflags "-X main.sha=$sha -X main.version=$ver -X 'main.date=$date'"
 
-FROM centos
+FROM centos:7
 RUN yum install -y bind-utils
 EXPOSE 5000
 COPY --from=build /go/src/dns .
