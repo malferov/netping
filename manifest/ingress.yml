@@ -1,5 +1,5 @@
 {% set host = app + '.' + domain %}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend
@@ -21,7 +21,7 @@ spec:
             servicePort: 80
 ---
 {% set api = 'api.' + host %}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: backend
