@@ -39,15 +39,15 @@ jobs:
       env:
         be_token: ${{ secrets.be_token }}
       run: |
-        cd terraform
+        cd infra
         ./init.sh
         terraform apply -auto-approve -var="ip=${{ secrets.K8S_SERVER }}"
 
     - name: ingress
       run: |
-        cd manifest
+        cd deploy
         ./kubeconfig.sh
-        ./ingress.sh
+        ./apply.sh
 
   build-deploy:
     runs-on: ubuntu-latest
@@ -59,6 +59,7 @@ jobs:
         - ping
         - dns
         - send
+        - uuid
     steps:
     - uses: actions/checkout@v2
       with:
@@ -93,6 +94,6 @@ jobs:
 
     - name: deploy service
       run: |
-        cd manifest
+        cd deploy
         ./kubeconfig.sh
         ./service.sh ${{ matrix.service }}

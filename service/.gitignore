@@ -2,5 +2,6 @@ dns/dns
 ping/ping
 send/send
 whoami/whoami
+uuid/uuid
 go.sum
 go.mod
