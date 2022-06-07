@@ -27,7 +27,7 @@ func setupRouter() *gin.Engine {
 	g := r.Group("/uuid")
 	{
 		g.GET("/version", getVersion)
-		g.POST("/generate", generate)
+		g.GET("/generate", generate)
 	}
 	return r
 }
