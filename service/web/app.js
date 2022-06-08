@@ -9,11 +9,13 @@ const app = Vue.createApp({
       contact: false,
       subject: '',
       message: '',
-      email: ''
+      email: '',
+      uuid: ''
     }
   },
   methods: {
     main() {
+      this.output = '';
       fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
         .then(response => response.json())
         .then(data =>
@@ -57,6 +59,11 @@ const app = Vue.createApp({
       .then(response => response.json())
       .then(data =>
         this.ip = data.message)
+      .catch(error => console.error(error));
+    fetch(this.api + '/uuid/generate')
+      .then(response => response.json())
+      .then(data =>
+        this.uuid = data.uuid)
       .catch(error => console.error(error))
   }
 })

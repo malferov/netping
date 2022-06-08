@@ -23,7 +23,10 @@ var (
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
-	r.Use(cors.Default())
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"https://netping.org"},
+		AllowMethods: []string{"GET"},
+	}))
 	r.GET("/", statusOk)
 	g := r.Group("/dns")
 	{

@@ -13,9 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <meta name="keyword" content="netping, ping online port, portcheck, online dns lookup">
-    <meta name="description" content="Netping is a free online network service">
-    <title>Online Ping, Port Check, DNS Lookup - Netping</title>
+    <meta name="keyword" content="netping, ping online port, port check, online dns lookup, uuid/guid generator">
+    <meta name="description" content="netping.org provides free network tools">
+    <title>Online Ping, Port Check, DNS Lookup, UUID/GUID Generator - netping.org</title>
     <link rel="shortcut icon" href="favicon.ico?v=1">
     <link rel="stylesheet" href="main.css">
     <script src="vue.js"></script>
@@ -33,7 +33,8 @@
                             </a>
                         </h1>
                     </div>
-                    <span class="header__ip-address">Your public IP address is <b>{{ ip }}</b></span>
+                    <span>UUID <b>{{ uuid }}</b></span>
+                    <span>Your public IP address is <b>{{ ip }}</b></span>
                 </div>
             </header>
             <main class="content-wrapper" v-if="!contact">
@@ -119,7 +120,7 @@
 {% endraw %}
         <footer class="footer">
             <div class="footer__wrapper">
-                <span>netping.org © 2021</span>
+                <span>netping.org © 2022</span>
                 <span hidden>sha {{ sha }}</span>
                 <span>version {{ ver }}</span>
                 <span hidden>date {{ date }}</span>

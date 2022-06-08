@@ -20,9 +20,7 @@ spec:
                 name: web
                 port:
                   number: 80
-
-
-
+---
 {% set host = app + '.' + domain %}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -32,21 +30,21 @@ metadata:
     app: frontend
 spec:
   tls:
-  - hosts:
-    - {{ host }}
-    secretName: tls
+    - hosts:
+      - {{ host }}
+      secretName: tls
   ingressClassName: nginx
   rules:
     - host: {{ host }}
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: web
-              port:
-                number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
 ---
 {% set api = 'api.' + host %}
 apiVersion: networking.k8s.io/v1
@@ -57,9 +55,9 @@ metadata:
     app: backend
 spec:
   tls:
-  - hosts:
-    - {{ api }}
-    secretName: tls
+    - hosts:
+      - {{ api }}
+      secretName: tls
   ingressClassName: nginx
   rules:
     - host: {{ api }}
@@ -69,7 +67,8 @@ spec:
   'whoami',
   'ping',
   'dns',
-  'send'
+  'send',
+  'uuid'
   ]
 %}
         - path: /{{ service }}/

@@ -5,6 +5,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
+	"github.com/google/uuid"
 	"net/http"
 	"os"
 )
@@ -23,10 +24,10 @@ func setupRouter() *gin.Engine {
 		AllowMethods: []string{"GET"},
 	}))
 	r.GET("/", statusOk)
-	g := r.Group("/whoami")
+	g := r.Group("/uuid")
 	{
 		g.GET("/version", getVersion)
-		g.GET("/ip", getIp)
+		g.GET("/generate", generate)
 	}
 	return r
 }
@@ -35,9 +36,7 @@ func main() {
 	var port string
 	flag.StringVar(&port, "port", "5000", "server listening port")
 	flag.Parse()
-
 	pod, _ = os.Hostname()
-
 	router := setupRouter()
 	router.Run(":" + port)
 }
@@ -58,10 +57,10 @@ func statusOk(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
-func getIp(c *gin.Context) {
-	glog.Info("whoami: begin")
+func generate(c *gin.Context) {
+	uuid := uuid.NewString()
 	c.JSON(http.StatusOK, gin.H{
-		"message": c.ClientIP(),
+		"uuid": uuid,
 	})
-	glog.Infof("whoami: %d", http.StatusOK)
+	glog.Infof("uuid: %s", uuid)
 }
