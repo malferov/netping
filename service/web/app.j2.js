@@ -54,11 +54,13 @@ const app = Vue.createApp({
           console.error(error);
         })
       this.button = "Message sent!";
-      this.subject = '';
-      this.message = '';
-      this.email = '';
-      setTimeout(this.button = "Send message", 1500);
-      this.contact = false;
+      setTimeout(() => {
+          this.contact = false;
+          this.subject = '';
+          this.message = '';
+          this.email = '';
+          this.button = "Send message";
+      }, 2000);
     }
   },
   mounted() {

@@ -1,10 +1,10 @@
 .menu-sidebar {
   width: 100%;
   position: absolute;
-  max-width: 337px;
+  max-width: 300px;
   margin: 0;
   background: #fff;
-  box-shadow: 0 9px 18px rgba(0, 0, 0, .18);
+  box-shadow: 0 9px 18px rgb(0 0 0 / 18%);
   border-radius: 2px;
   overflow: hidden;
 
@@ -74,9 +74,8 @@
     &__link {
       min-height: 94px;
       display: flex;
-      justify-content: flex-start;
       align-items: center;
-      padding: 22px 9px 14px 17px;
+      padding: 20px;
       text-decoration: none;
     }
 
@@ -85,28 +84,20 @@
       height: 100%;
       max-width: 45px;
       max-height: 48px;
+      flex: none;
       path {
         fill: $menu-item-light-color;
       }
     }
 
     &__content {
-      width: 100%;
-      max-width: 206px;
-      margin-left: 15px;
+      margin-left: 30px;
     }
 
     &__title {
-      margin-bottom: 5px;
       font-size: 18px;
       line-height: 21px;
       color: rgba(0, 0, 0, .87);
-    }
-
-    &__desc {
-      font-size: 15px;
-      line-height: 16px;
-      color: $menu-item-light-color;
     }
   }
 }

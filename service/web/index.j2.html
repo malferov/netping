@@ -53,8 +53,9 @@
                                         <path d="M21.3632 7.97049C20.6883 7.97049 20.1309 8.52798 20.1309 9.20283V23.7953L33.4812 30.7003C33.6573 30.7884 33.8529 30.8373 34.0485 30.8373C34.518 30.8373 34.9385 30.583 35.1537 30.1624C35.4667 29.5658 35.2222 28.8127 34.6256 28.4997L22.6151 22.2891V9.20283C22.5955 8.5182 22.0381 7.97049 21.3632 7.97049Z" fill="#757575"/>
                                     </svg>
                                     <div class="menu-item__content">
-                                        <div class="menu-item__title">Ping</div>
-                                        <div class="menu-item__desc">Used to test the reachability of a host and measures the round-trip time</div>
+                                        <div class="menu-item__title"
+                                            title="Used to check host availability and measure round-trip time."
+                                        >Ping</div>
                                     </div>
                                 </a>
                             </li>
@@ -73,8 +74,9 @@
                                         <path d="M5.78575 21.3814H1.60718V23.6957H5.78575V21.3814Z" fill="#757575"/>
                                     </svg>
                                     <div class="menu-item__content">
-                                        <div class="menu-item__title">DNS lookup</div>
-                                        <div class="menu-item__desc">Used to obtain domain name or IP address mapping, or other DNS records</div>
+                                        <div class="menu-item__title"
+                                            title="Used to resolve a domain name to an IP address, or retrieve other DNS records."
+                                        >DNS Lookup</div>
                                     </div>
                                 </a>
                             </li>
@@ -90,15 +92,16 @@
                                         <path d="M28.2983 33.7885H23.924C23.2826 33.7885 22.7695 33.2754 22.7695 32.634V30.1582C22.7695 29.5168 23.2826 29.0037 23.924 29.0037H28.2983C28.9397 29.0037 29.4528 29.5168 29.4528 30.1582V32.634C29.4528 33.2754 28.9397 33.7885 28.2983 33.7885ZM25.0785 31.4795H27.1438V31.3127H25.0785V31.4795Z" fill="#757575"/>
                                     </svg>
                                     <div class="menu-item__content">
-                                        <div class="menu-item__title">Port check</div>
-                                        <div class="menu-item__desc">Used to determine whether specific port is up and running</div>
+                                        <div class="menu-item__title"
+                                            title="Used to determine whether a specific port is up and running."
+                                        >Port Check</div>
                                     </div>
                                 </a>
                             </li>
                 </ul>
             </aside>
             <div class="main-content">
-                <form v-on:submit.prevent="call" class="main-content__form">
+                <form v-on:submit.prevent="call" class="main-content__form" spellcheck="false">
                     <div class="main-input__wrapper">
                         <input type="text" v-model.text="hostname" placeholder="Еnter IP address or hostname" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.-]{2,22}[a-zA-Z\d]" required />
                         <button type="submit" class="main-btn btn-active"></button>
