@@ -20,7 +20,7 @@ RUN jinja2 ../app.j2.js -D app=$app > app.js
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
-ADD https://unpkg.com/vue@3.2.37/dist/vue.global.prod.js vue.js
+ADD https://unpkg.com/vue@3.2.37/dist/vue.runtime.global.prod.js vue.js
 RUN chmod +r *.js
 COPY --from=tpl main.css main.css
 COPY --from=tpl rendered/http.conf /etc/nginx/conf.d/
