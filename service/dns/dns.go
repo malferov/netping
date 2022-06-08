@@ -90,11 +90,18 @@ func dns(c *gin.Context) {
 			hostname, "SRV",
 			hostname, "TXT",
 		).CombinedOutput()
+
 		if err != nil {
 			glog.Error("dns: " + err.Error())
 		}
+
+		msg := "Could not resolve host"
+		if len(out) > 0 {
+			msg = string(out)
+		}
+
 		c.JSON(http.StatusOK, gin.H{
-			"message": string(out),
+			"message": msg,
 		})
 	}
 	glog.Infof("dns: %d", http.StatusOK)

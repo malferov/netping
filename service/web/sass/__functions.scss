@@ -5,7 +5,7 @@
 // helper function, that strips units (12px => 12)
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+    @return calc($number / ($number * 0 + 1));
   }
 
   @return $number;
@@ -23,7 +23,7 @@
   $w-min: strip-unit($w-min);
   $w-max: strip-unit($w-max);
 
-  $k: ($f-max - $f-min)/($w-max - $w-min);
+  $k: calc(($f-max - $f-min)/($w-max - $w-min));
   $b: $f-min - $k * $w-min;
 
   $b: $b + $units;

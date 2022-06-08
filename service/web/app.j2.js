@@ -7,6 +7,7 @@ const app = Vue.createApp({
       ip: '',
       selected: 'ping',
       contact: false,
+      button: "Send message",
       subject: '',
       message: '',
       email: '',
@@ -14,7 +15,7 @@ const app = Vue.createApp({
     }
   },
   methods: {
-    main() {
+    call() {
       this.output = '';
       fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
         .then(response => response.json())
@@ -22,7 +23,11 @@ const app = Vue.createApp({
           this.output = data.message)
         .catch(error => {
           console.error(error);
-          this.output = '501 Not Implemented';
+          if (this.selected == 3) {
+            this.output = '501 Not Implemented';
+          } else {
+            this.output = error;
+          }
         })
     },
     active(index) {
@@ -48,10 +53,14 @@ const app = Vue.createApp({
         .catch(error => {
           console.error(error);
         })
-      this.subject = '';
-      this.message = '';
-      this.email = '';
-      this.contact = false;
+      this.button = "Message sent!";
+      setTimeout(() => {
+          this.contact = false;
+          this.subject = '';
+          this.message = '';
+          this.email = '';
+          this.button = "Send message";
+      }, 2000);
     }
   },
   mounted() {

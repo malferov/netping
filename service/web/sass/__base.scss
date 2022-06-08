@@ -25,17 +25,10 @@ body {
 }
 
 .content {
-  flex: 1 0 auto;
+  flex: auto;
 }
 
 .content-wrapper {
   margin: 25px 0 10px;
   display: flex;
-}
-
-.container {
-  width: 100%;
-  max-width: 1170px;
-  padding: 0 15px;
-  margin: 0 auto;
 }
