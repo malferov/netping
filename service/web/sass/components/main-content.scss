@@ -3,7 +3,6 @@
 
   &__form {
     .main-input {
-      width: 100%;
       padding: 30px 209px 35px 48px;
       background: #fff;
       box-shadow: 0 0 2px rgba(0, 0, 0, .12);
@@ -11,7 +10,6 @@
       border: none;
       font-family: $font-family--roboto-mono;
       font-size: 18px;
-      line-height: 21px;
       color: rgba(0, 0, 0, 0.78);
 
       &.input-active {
@@ -41,7 +39,7 @@
 
     button[type='submit'] {
       position: absolute;
-      right: 0;
+      left: 500px;
       top: 50%;
       transform: translateY(-50%);
       width: 86px;

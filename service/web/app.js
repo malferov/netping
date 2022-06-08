@@ -15,6 +15,7 @@ const app = Vue.createApp({
   },
   methods: {
     main() {
+      this.output = '';
       fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
         .then(response => response.json())
         .then(data =>
