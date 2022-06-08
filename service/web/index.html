@@ -29,12 +29,12 @@
                     <div class="header__logo">
                         <h1>
                             <a href="/">
-                                <img src="images/logo.svg" alt="Netping - network tools">
+                                <img src="images/logo.svg" alt="netping.org - network tools">
                             </a>
                         </h1>
                     </div>
-                    <span>UUID <b>{{ uuid }}</b></span>
-                    <span>Your public IP address is <b>{{ ip }}</b></span>
+                    <span class="header__item">UUID <b>{{ uuid }}</b></span>
+                    <span class="header__item">Your public IP address is <b>{{ ip }}</b></span>
                 </div>
             </header>
             <main class="content-wrapper" v-if="!contact">
@@ -98,22 +98,22 @@
                 </ul>
             </aside>
             <div class="main-content">
-                <form v-on:submit.prevent class="main-content__form">
+                <form v-on:submit.prevent="call" class="main-content__form">
                     <div class="main-input__wrapper">
-                        <input type="text" v-model.text="hostname" placeholder="Еnter IP address or hostname" size="28" class="main-input input-active"/>
-                        <button type="submit" class="main-btn btn-active" v-on:click="main"></button>
+                        <input type="text" v-model.text="hostname" placeholder="Еnter IP address or hostname" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.-]{2,22}[a-zA-Z\d]" required />
+                        <button type="submit" class="main-btn btn-active"></button>
                     </div>
                 </form>
                 <div v-if="output" class="output-content"><h2>Output</h2>{{ output }}</div>
             </div>
             </main>
-            <div v-if="contact" class=form-wrapper>
-                <form @submit="send" action=/ class=contact-form>
-                    <div class=contact-form__title>Contact</div>
-                    <fieldset class=contact-form__row><input v-model="subject" class=contact-form__input placeholder="Message subject" required></fieldset>
-                    <fieldset class=contact-form__row><textarea v-model="message" class=contact-form__textarea placeholder="How can we help you today?" required></textarea></fieldset>
-                    <fieldset class=contact-form__row><input v-model="email" class=contact-form__input type=email placeholder="Your email address" required></fieldset>
-                    <button class=contact-form__btn name=submit type=submit>Send message</button>
+            <div v-if="contact" class="form-wrapper">
+                <form v-on:submit.prevent="send" action="/" class="contact-form">
+                    <div class="contact-form__title">Contact</div>
+                    <fieldset class="contact-form__row"><input v-model="subject" class="contact-form__input" placeholder="Message subject" required></fieldset>
+                    <fieldset class="contact-form__row"><textarea v-model="message" class="contact-form__textarea" placeholder="How can we help you today?" required></textarea></fieldset>
+                    <fieldset class="contact-form__row"><input v-model="email" class="contact-form__input" type=email placeholder="Your email address" required></fieldset>
+                    <button class="contact-form__btn" type="submit">{{ button }}</button>
                 </form>
             </div>
         </div>

@@ -1,19 +1,22 @@
 .main-content {
   margin-left: 400px;
+  width: 100%;
 
   &__form {
     .main-input {
-      padding: 30px 209px 35px 48px;
+      padding: 30px 86px 30px 48px;
       background: #fff;
-      box-shadow: 0 0 2px rgba(0, 0, 0, .12);
+      box-shadow: 0 0 2px rgb(0 0 0 / 12%);
       border-radius: 5px;
       border: none;
       font-family: $font-family--roboto-mono;
       font-size: 18px;
       color: rgba(0, 0, 0, 0.78);
+      flex: auto;
+      max-width: 500px;
 
       &.input-active {
-        box-shadow: 0 5.5px 5px rgba(0, 0, 0, .24)
+        box-shadow: 0 5.5px 5px rgb(0 0 0 / 24%);
       }
 
       &:focus {
@@ -33,26 +36,23 @@
       }
 
       &__wrapper {
-        position: relative;
+        display: flex;
       }
     }
 
     button[type='submit'] {
-      position: absolute;
-      left: 500px;
-      top: 50%;
-      transform: translateY(-50%);
+      position: relative;
+      right: 86px;
       width: 86px;
       height: 86px;
       background: url('images/right-arrow.svg');
       background-repeat: no-repeat;
       background-position: center;
       border: none;
-      outline: 0;
       cursor: pointer;
-      overflow: hidden;
       opacity: 0;
       visibility: hidden;
+      flex: none;
 
       &.btn-active {
         opacity: 1;
@@ -66,6 +66,7 @@
     font-family: $font-family--roboto-mono;
     unicode-bidi: embed;
     white-space: pre-wrap;
+    padding: 0 14px;
   }
 
   h2 {
@@ -82,5 +83,8 @@
   .main-content {
     margin-left: 0;
     margin-top: 350px;
+  }
+  .footer {
+    padding: 14px;
   }
 }
