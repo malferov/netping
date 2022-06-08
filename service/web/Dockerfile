@@ -11,20 +11,21 @@ RUN tar -xzf $sass
 COPY sass sass
 RUN dart-sass/sass sass/main.scss main.css --style compressed --no-source-map
 
-RUN pip install jinja2-cli
-COPY http.conf index.html app.js ./
-RUN jinja2 http.conf -D app=$app > http.conf.rendered
-RUN jinja2 index.html -D app=$app -D sha=$sha -D ver=$ver -D date="$date" > index.html.rendered
-RUN jinja2 app.js -D app=$app > app.js.rendered
+RUN pip3 install jinja2-cli
+COPY *.j2.* ./
+WORKDIR rendered
+RUN jinja2 ../http.j2.conf -D app=$app > http.conf
+RUN jinja2 ../index.j2.html -D app=$app -D sha=$sha -D ver=$ver -D date="$date" > index.html
+RUN jinja2 ../app.j2.js -D app=$app > app.js
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 ADD https://unpkg.com/vue@3.2.30/dist/vue.global.prod.js vue.js
 RUN chmod +r *.js
 COPY --from=tpl main.css main.css
-COPY --from=tpl http.conf.rendered /etc/nginx/conf.d/http.conf
-COPY --from=tpl index.html.rendered index.html
-COPY --from=tpl app.js.rendered app.js
+COPY --from=tpl rendered/http.conf /etc/nginx/conf.d/
+COPY --from=tpl rendered/index.html .
+COPY --from=tpl rendered/app.js .
 COPY fonts fonts
 COPY images images
 COPY favicon.ico favicon.ico
