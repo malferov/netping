@@ -21,6 +21,7 @@ ver=$(git rev-parse --short HEAD) docker-compose up --build -d
 ```
 kubectl create namespace netping
 docker login docker.pkg.github.com
+echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 kubectl create secret generic regcred \
   --from-file=.dockerconfigjson=./.docker/config.json \
   --type=kubernetes.io/dockerconfigjson \
