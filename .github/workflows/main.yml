@@ -13,7 +13,7 @@ env:
   domain: org
   TF_VAR_app: netping
   TF_VAR_domain: org
-  registry: docker.pkg.github.com
+  registry: ghcr.io
 
   TF_INPUT: 0
   TF_IN_AUTOMATION: 1

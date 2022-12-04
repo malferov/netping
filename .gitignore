@@ -3,3 +3,4 @@
 *.tfvars
 *.rendered
 *.off
+.env
