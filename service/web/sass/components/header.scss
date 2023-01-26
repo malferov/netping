@@ -19,5 +19,14 @@
 
   &__item {
     color: rgba(0, 0, 0, 0.87);
+    display: grid;
+    img {
+      max-width: 17px;
+      padding: 2px;
+      padding-bottom: 0;
+    }
+    img:active {
+      transform: scale(0.8);
+    }
   }
 }

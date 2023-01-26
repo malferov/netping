@@ -33,8 +33,14 @@
                             </a>
                         </h1>
                     </div>
-                    <span class="header__item">UUID <b>{{ uuid }}</b></span>
-                    <span class="header__item">Your public IP address is <b>{{ ip }}</b></span>
+                    <div class="header__item">
+                        <div>UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)"></div>
+                        <b>{{ uuid }}</b>
+                    </div>
+                    <div class="header__item">
+                        <div>Your IP<img src="images/copy-button.svg" alt="Copy" @click="copy(ip)"></div>
+                        <b>{{ ip }}</b>
+                    </div>
                 </div>
             </header>
             <main class="content-wrapper" v-if="!contact">
