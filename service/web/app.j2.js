@@ -61,6 +61,10 @@ const app = Vue.createApp({
           this.email = '';
           this.button = "Send message";
       }, 2000);
+    },
+    async copy(s) {
+      await navigator.clipboard.writeText(s);
+      alert('Copied!');
     }
   },
   mounted() {
