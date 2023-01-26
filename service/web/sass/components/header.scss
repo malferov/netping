@@ -25,5 +25,8 @@
       padding: 2px;
       padding-bottom: 0;
     }
+    img:active {
+      transform: scale(0.8);
+    }
   }
 }

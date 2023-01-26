@@ -64,7 +64,6 @@ const app = Vue.createApp({
     },
     async copy(s) {
       await navigator.clipboard.writeText(s);
-      alert('Copied!');
     }
   },
   mounted() {
