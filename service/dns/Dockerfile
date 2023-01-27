@@ -12,5 +12,6 @@ FROM centos:7
 RUN yum install -y bind-utils
 EXPOSE 5000
 COPY --from=build /go/src/dns .
+COPY dig.sh .
 ENTRYPOINT ["./dns"]
 CMD ["-stderrthreshold=ERROR"]
