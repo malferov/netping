@@ -77,7 +77,7 @@ func dns(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed ip address or hostname"})
 	} else {
 		out, err := exec.Command(
-			"dig", "+noall", "+answer", "+norecurse"
+			"dig", "+noall", "+answer", "+norecurse",
 			hostname, "A",
 			hostname, "AAAA",
 			hostname, "CAA",
