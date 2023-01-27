@@ -77,25 +77,14 @@ func dns(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed ip address or hostname"})
 	} else {
 		out, err := exec.Command(
-			"dig", "+noall", "+answer",
-			hostname, "A",
-			hostname, "AAAA",
-			hostname, "CAA",
-			hostname, "CERT",
-			hostname, "CNAME",
-			hostname, "HINFO",
-			hostname, "MX",
-			hostname, "NS",
-			hostname, "SOA",
-			hostname, "SRV",
-			hostname, "TXT",
+			"./dig.sh", hostname,
 		).CombinedOutput()
 
 		if err != nil {
 			glog.Error("dns: " + err.Error())
 		}
 
-		msg := "Could not resolve host"
+		msg := "Not found"
 		if len(out) > 0 {
 			msg = string(out)
 		}
