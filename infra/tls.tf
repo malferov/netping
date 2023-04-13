@@ -22,6 +22,8 @@ resource "acme_certificate" "cert" {
 
     config = {
       DO_AUTH_TOKEN = var.do_token
+      DO_POLLING_INTERVAL = 3
+      DO_PROPAGATION_TIMEOUT = 60
     }
   }
 }
