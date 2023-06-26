@@ -2,6 +2,7 @@ FROM golang AS build
 ARG sha
 ARG ver
 ARG date
+ARG CGO_ENABLED=0
 WORKDIR /go/src
 COPY uuid.go .
 RUN go mod init uuid
