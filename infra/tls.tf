@@ -12,7 +12,7 @@ resource "acme_registration" "reg" {
   email_address   = var.email
 }
 
-# trigger G01
+# trigger G02
 resource "acme_certificate" "cert" {
   account_key_pem           = acme_registration.reg.account_key_pem
   common_name               = "${var.app}.${var.domain}"
