@@ -3,5 +3,6 @@ ping/ping
 send/send
 whoami/whoami
 uuid/uuid
+portcheck/portcheck
 go.sum
 go.mod
