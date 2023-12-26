@@ -133,9 +133,10 @@
                     <span hidden>date {{ date }}</span>
                     <a v-on:click="contact = true" href="#">Contact</a>
                 </div>
-                <div>
-                    <div>UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)"></div>
+                <div class="header__item">
+                    <span>UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
                     {% raw %}<b>{{ uuid }}</b>{% endraw %}
+                    </span>
                 </div>
             </div>
         </footer>
