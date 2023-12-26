@@ -60,6 +60,7 @@ jobs:
         - dns
         - send
         - uuid
+        - portcheck
     steps:
     - uses: actions/checkout@v2
       with:

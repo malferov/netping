@@ -1,5 +1,14 @@
-version: '3.7'
+version: '3.8'
 services:
+  portcheck:
+    build:
+      context: service/portcheck/.
+      args:
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
+    ports:
+      - "5000:5000"
   web:
     build:
       context: service/web/.
@@ -10,21 +19,3 @@ services:
         date: ${date}
     ports:
       - "80:80"
-  ping:
-    build:
-      context: service/ping/.
-      args:
-        sha: ${sha}
-        ver: ${ver}
-        date: ${date}
-    ports:
-      - "5000:5000"
-  dns:
-    build:
-      context: service/dns/.
-      args:
-        sha: ${sha}
-        ver: ${ver}
-        date: ${date}
-    ports:
-      - "5001:5000"

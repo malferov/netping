@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188029181-1"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4DCTNNEP8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-188029181-1');
+        gtag('config', 'G-F4DCTNNEP8');
     </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,10 +33,6 @@
                                 <img src="images/logo.svg" alt="netping.org - network tools">
                             </a>
                         </h1>
-                    </div>
-                    <div class="header__item">
-                        <div>UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)"></div>
-                        <b>{{ uuid }}</b>
                     </div>
                     <div class="header__item">
                         <div>Your IP<img src="images/copy-button.svg" alt="Copy" @click="copy(ip)"></div>
@@ -86,7 +83,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="menu-item" v-on:click="active(3)" :class="{active:selected == 3}">
+                            <li class="menu-item" v-on:click="active('portcheck')" :class="{active:selected == 'portcheck'}">
                                 <a class="menu-item__link" href="#">
                                     <svg class="menu-item__icon" width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.5 45C10.0955 45 0 34.9045 0 22.5C0 10.0955 10.0955 0 22.5 0C34.9045 0 45 10.0955 45 22.5C45 34.9045 34.9045 45 22.5 45ZM22.5 2.30901C11.3654 2.30901 2.30901 11.3654 2.30901 22.5C2.30901 33.6346 11.3654 42.691 22.5 42.691C33.6346 42.691 42.691 33.6346 42.691 22.5C42.691 11.3654 33.6346 2.30901 22.5 2.30901Z" fill="#757575"/>
@@ -99,7 +96,7 @@
                                     </svg>
                                     <div class="menu-item__content">
                                         <div class="menu-item__title"
-                                            title="Used to determine whether a specific port is up and running."
+                                            title="Used to determine whether a specific port is up."
                                         >Port Check</div>
                                     </div>
                                 </a>
@@ -109,7 +106,7 @@
             <div class="main-content">
                 <form v-on:submit.prevent="call" class="main-content__form" spellcheck="false">
                     <div class="main-input__wrapper">
-                        <input type="text" v-model.text="hostname" placeholder="Еnter IP address or hostname" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.-]{2,40}[a-zA-Z\d]" required />
+                        <input type="text" v-model="hostname" :placeholder="placeholder" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.\-\:]{2,40}[a-zA-Z\d]" required />
                         <button type="submit" class="main-btn btn-active"></button>
                     </div>
                 </form>
@@ -129,11 +126,16 @@
 {% endraw %}
         <footer class="footer">
             <div class="footer__wrapper">
-                <span>netping.org © 2022</span>
+                <span>netping.org © 2023</span>
                 <span hidden>sha {{ sha }}</span>
                 <span>version {{ ver }}</span>
                 <span hidden>date {{ date }}</span>
                 <a v-on:click="contact = true" href="#">Contact</a>
+            </div>
+            <div class="footer__wrapper">
+                <span>UUID</span>
+                <img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
+                <span><b>{% raw %}{{ uuid }}{% endraw %}</b></span>
             </div>
         </footer>
     </div>

@@ -1,17 +1,25 @@
 .footer {
   flex: 0 0 auto;
   padding: 14px 30px;
-  font-weight: 300;
   font-size: 18px;
   line-height: 21px;
   color: rgba(0, 0, 0, .87);
 
   &__wrapper {
+    //display: inline-block;
     span {
       margin-right: 30px;
     }
     a {
       margin-right: 30px;
+    }
+    img {
+      max-width: 17px;
+      padding: 2px;
+      padding-bottom: 0;
+    }
+    img:active {
+      transform: scale(0.8);
     }
   }
 }
