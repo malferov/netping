@@ -3,7 +3,7 @@ const app = Vue.createApp({
     return {
       api: 'https://api.{{ app }}',
       hostname: '',
-      placeholder: '',
+      placeholder: 'Еnter IP address or hostname',
       output: '',
       ip: '',
       selected: 'ping',
@@ -18,7 +18,11 @@ const app = Vue.createApp({
   methods: {
     call() {
       this.output = '';
-      fetch(this.api + '/' + this.selected + '/v1/' + this.hostname)
+      const path = this.hostname;
+      if (index == 'portcheck') {
+        path = path.replace(':', '/');
+      }
+      fetch(this.api + '/' + this.selected + '/v1/' + path)
         .then(response => response.json())
         .then(data =>
           this.output = data.message)
@@ -30,6 +34,7 @@ const app = Vue.createApp({
     active(index) {
       if (index != this.selected) {
         this.output = '';
+        this.hostname = '';
         this.selected = index;
         if (index == 'portcheck') {
           this.placeholder = 'hostname:port'
