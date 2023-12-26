@@ -19,7 +19,7 @@ const app = Vue.createApp({
     call() {
       this.output = '';
       const path = this.hostname;
-      if (index == 'portcheck') {
+      if (this.selected == 'portcheck') {
         path = path.replace(':', '/');
       }
       fetch(this.api + '/' + this.selected + '/v1/' + path)
