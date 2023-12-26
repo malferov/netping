@@ -9,3 +9,13 @@ services:
         date: ${date}
     ports:
       - "5000:5000"
+  web:
+    build:
+      context: service/web/.
+      args:
+        app: netping
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
+    ports:
+      - "80:80"

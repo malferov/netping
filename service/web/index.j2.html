@@ -131,9 +131,11 @@
                 <span>version {{ ver }}</span>
                 <span hidden>date {{ date }}</span>
                 <a v-on:click="contact = true" href="#">Contact</a>
-                <span class="header__item">UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
-                    {% raw %}<b>{{ uuid }}</b>{% endraw %}
-                </span>
+            </div>
+            <div class="footer__wrapper">
+                <span>UUID</span>
+                <img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
+                <span><b>{% raw %}c6365204-c09f-48bf-985b-759af1430053{% endraw %}</b></span>
             </div>
         </footer>
     </div>
