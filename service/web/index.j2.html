@@ -106,7 +106,7 @@
             <div class="main-content">
                 <form v-on:submit.prevent="call" class="main-content__form" spellcheck="false">
                     <div class="main-input__wrapper">
-                        <input type="text" v-model="hostname" :placeholder="placeholder" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.\-]{2,40}[a-zA-Z\d]" required />
+                        <input type="text" v-model="hostname" :placeholder="placeholder" size="10" class="main-input input-active" pattern="[a-zA-Z\d][a-zA-Z\d\.\-\:]{2,40}[a-zA-Z\d]" required />
                         <button type="submit" class="main-btn btn-active"></button>
                     </div>
                 </form>
