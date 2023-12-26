@@ -18,7 +18,7 @@ const app = Vue.createApp({
   methods: {
     call() {
       this.output = '';
-      const path = this.hostname;
+      let path = this.hostname;
       if (this.selected == 'portcheck') {
         path = path.replace(':', '/');
       }
