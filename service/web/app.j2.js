@@ -3,6 +3,7 @@ const app = Vue.createApp({
     return {
       api: 'https://api.{{ app }}',
       hostname: '',
+      placeholder: '',
       output: '',
       ip: '',
       selected: 'ping',
@@ -23,17 +24,18 @@ const app = Vue.createApp({
           this.output = data.message)
         .catch(error => {
           console.error(error);
-          if (this.selected == 3) {
-            this.output = '501 Not Implemented';
-          } else {
-            this.output = error;
-          }
+          this.output = error;
         })
     },
     active(index) {
       if (index != this.selected) {
         this.output = '';
         this.selected = index;
+        if (index == 'portcheck') {
+          this.placeholder = 'hostname:port'
+        } else {
+          this.placeholder = 'Еnter IP address or hostname'
+        }
       }
     },
     send() {
