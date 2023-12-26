@@ -51,7 +51,8 @@ spec:
   'ping',
   'dns',
   'send',
-  'uuid'
+  'uuid',
+  'portcheck'
   ]
 %}
         - path: /{{ service }}/
