@@ -126,18 +126,14 @@
 {% endraw %}
         <footer class="footer">
             <div class="footer__wrapper">
-                <div>
-                    <span>netping.org © 2023</span>
-                    <span hidden>sha {{ sha }}</span>
-                    <span>version {{ ver }}</span>
-                    <span hidden>date {{ date }}</span>
-                    <a v-on:click="contact = true" href="#">Contact</a>
-                </div>
-                <div class="header__item">
-                    <span>UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
+                <span>netping.org © 2023</span>
+                <span hidden>sha {{ sha }}</span>
+                <span>version {{ ver }}</span>
+                <span hidden>date {{ date }}</span>
+                <a v-on:click="contact = true" href="#">Contact</a>
+                <span class="header__item">UUID<img src="images/copy-button.svg" alt="Copy" @click="copy(uuid)">
                     {% raw %}<b>{{ uuid }}</b>{% endraw %}
-                    </span>
-                </div>
+                </span>
             </div>
         </footer>
     </div>
