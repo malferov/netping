@@ -9,7 +9,7 @@ RUN go mod init uuid
 RUN go mod tidy
 RUN go build -o uuid -ldflags "-X main.sha=$sha -X main.version=$ver -X 'main.date=$date'"
 
-FROM centos
+FROM alpine
 EXPOSE 5000
 COPY --from=build /go/src/uuid .
 ENTRYPOINT ["./uuid"]

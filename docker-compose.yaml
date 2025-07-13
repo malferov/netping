@@ -1,8 +1,7 @@
-version: '3.8'
 services:
-  portcheck:
+  dns:
     build:
-      context: service/portcheck/.
+      context: service/dns/.
       args:
         sha: ${sha}
         ver: ${ver}
