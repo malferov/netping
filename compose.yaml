@@ -1,0 +1,10 @@
+services:
+  dns:
+    build:
+      context: service/dns/.
+      args:
+        sha: ${sha}
+        ver: ${ver}
+        date: ${date}
+    ports:
+      - "5000:5000"

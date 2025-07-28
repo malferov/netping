@@ -76,7 +76,7 @@ func ping(c *gin.Context) {
 	if !validip(hostname) && !validhn(hostname) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "malformed ip address or hostname"})
 	} else {
-		out, err := exec.Command("ping", "-c 3", "-i 0.2", "-W 2", hostname).CombinedOutput()
+		out, err := exec.Command("ping", "-c3", "-i0.2", "-W2", hostname).CombinedOutput()
 		if err != nil {
 			glog.Error("ping: " + err.Error())
 		}

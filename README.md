@@ -15,7 +15,7 @@
 
 ## local
 ```
-ver=$(git rev-parse --short HEAD) docker-compose up --build -d
+ver=$(git rev-parse --short HEAD) docker compose up --build -d
 ```
 ## kube init
 ```
