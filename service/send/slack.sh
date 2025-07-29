@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 export BOT_TOKEN=$(cat ../../.key/slack.tok)
 
 ./send -stderrthreshold=INFO
