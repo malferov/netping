@@ -9,7 +9,7 @@ resource "digitalocean_record" "web" {
   type   = "A"
   name   = "@"
   value  = var.ip
-  ttl    = 60
+  ttl    = 600
 }
 
 resource "digitalocean_record" "api" {
@@ -17,5 +17,5 @@ resource "digitalocean_record" "api" {
   type   = "A"
   name   = "api"
   value  = var.ip
-  ttl    = 60
+  ttl    = 600
 }

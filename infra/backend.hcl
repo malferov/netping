@@ -1,4 +1,4 @@
 workspaces { name = "netping" }
 hostname     = "app.terraform.io"
-organization = "softec"
+organization = "conixone"
 token        = "{{ be_token }}"
