@@ -17,7 +17,7 @@ env:
 
   TF_INPUT: 0
   TF_IN_AUTOMATION: 1
-  TF_VAR_do_token: ${{ secrets.do_token }}
+  TF_VAR_do_token: ${{ secrets.DO_TOKEN }}
   TF_VAR_letsencrypt_url: https://acme-v02.api.letsencrypt.org/directory
   TF_VAR_email: ${{ secrets.EMAIL }}
 
@@ -31,14 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: hashicorp/setup-terraform@v3 
+    - uses: hashicorp/setup-terraform@v3
 
     - name: deps
       run: sudo pip install jinja2-cli
 
     - name: tls and dns
       env:
-        be_token: ${{ secrets.be_token }}
+        be_token: ${{ secrets.BE_TOKEN }}
       run: |
         cd infra
         ./init.sh
